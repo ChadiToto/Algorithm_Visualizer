@@ -1,9 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Anton");
 body {
   margin: 0;
   background-color: #e1e5f2;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    "Press Start 2P", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
