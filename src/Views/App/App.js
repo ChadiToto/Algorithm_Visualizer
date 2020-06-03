@@ -4,19 +4,17 @@ import { Grid } from "@material-ui/core";
 
 import Header from "../../Components/Header";
 
+import Home from "../Main/Home";
+
 function App() {
   return (
-    <Grid container direction="column" spacing={10}>
+    <Grid container direction="column" spacing={6}>
       <Grid item xs={12}>
         <Header></Header>
       </Grid>
 
-      <Grid item container>
-        <Grid item xs={2} />
-        <Grid item xs={8}>
-          qsdsqd
-        </Grid>
-        <Grid item xs={2} />
+      <Grid item direction="column" spacing={5} container>
+        <Home></Home>
       </Grid>
     </Grid>
   );
