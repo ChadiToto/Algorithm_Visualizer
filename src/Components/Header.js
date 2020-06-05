@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   root: {
     boxShadow: "none",
-    backgroundColor: "#022B3A",
+    backgroundColor: "#1E212B",
   },
   typo: {
     fontFamily: "Wallpoet",

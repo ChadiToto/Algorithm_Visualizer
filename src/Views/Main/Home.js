@@ -9,7 +9,9 @@ const useStyles = makeStyles({
     marginLeft: "4.5vw",
   },
   typo: {
-    fontFamily: "Ubuntu",
+    textTransform: "uppercase",
+    fontFamily: "Roboto",
+    fontWeight: 500,
   },
   container: {
     marginTop: "3vh",
@@ -25,11 +27,11 @@ const Home = () => {
       </Typography>
 
       <Grid container spacing={2} className={classes.container}>
-        <Grid item xs={11} sm={5}>
+        <Grid item xs={11} sm={10} md={5}>
           <Card></Card>
         </Grid>
         <Grid item xs={1}></Grid>
-        <Grid item xs={11} sm={5}>
+        <Grid item xs={11} sm={10} md={5}>
           <Card></Card>
         </Grid>
       </Grid>
