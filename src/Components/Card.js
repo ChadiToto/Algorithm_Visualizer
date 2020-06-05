@@ -11,13 +11,14 @@ import {
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 
 const useStyles = makeStyles({
-  root: {},
   media: {
-    height: 190,
+    display: "flex",
+    minHeight: 190,
     width: "100%",
     backgroundSize: "cover",
   },
   content: {
+    height: "100%",
     marginLeft: 25,
     paddingTop: "4.5vh",
   },
@@ -35,8 +36,8 @@ const useStyles = makeStyles({
     color: "white",
     float: "right",
     marginRight: 20,
-    marginTop: 10,
-    fontSize: 40,
+    fontSize: 45,
+    paddingBottom: 10,
   },
 });
 
@@ -45,7 +46,7 @@ export default function MediaCard(props) {
 
   return (
     <Box boxShadow={10}>
-      <Card className={classes.root}>
+      <Card>
         <CardActionArea>
           <CardMedia
             className={classes.media}
@@ -59,10 +60,10 @@ export default function MediaCard(props) {
               <Typography className={classes.description}>
                 {props.child.desc}
               </Typography>
+              <PlayCircleFilledIcon
+                className={classes.play}
+              ></PlayCircleFilledIcon>
             </Box>
-            <PlayCircleFilledIcon
-              className={classes.play}
-            ></PlayCircleFilledIcon>
           </CardMedia>
         </CardActionArea>
       </Card>

@@ -36,7 +36,6 @@ const Home = () => {
                 <Grid
                   item
                   xs={11}
-                  sm={10}
                   md={Math.floor((12 - 1) / row.children.length)}
                 >
                   <Card child={child}></Card>
