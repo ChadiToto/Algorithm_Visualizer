@@ -40,7 +40,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard() {
+export default function MediaCard(props) {
   const classes = useStyles();
 
   return (
@@ -49,14 +49,15 @@ export default function MediaCard() {
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image="https://image.freepik.com/free-photo/bright-colors-arrayed-gradient_23-2147734173.jpg"
+            image={props.child.image}
             title="Sorting Algorithms"
           >
             <Box className={classes.content} color="white">
-              <Typography className={classes.title}>Sorting</Typography>
+              <Typography className={classes.title}>
+                {props.child.title}
+              </Typography>
               <Typography className={classes.description}>
-                Vizualize multiple sorting algortihms that includes Bubble,
-                Selection, Insertion and Merge Sort.
+                {props.child.desc}
               </Typography>
             </Box>
             <PlayCircleFilledIcon
