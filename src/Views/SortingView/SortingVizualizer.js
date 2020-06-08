@@ -1,10 +1,20 @@
+/* React Main Features */
 import React from "react";
 import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { Grid, Paper } from "@material-ui/core";
+/* Material UI Components */
+import { Grid, Paper, Typography, IconButton } from "@material-ui/core";
 
+/* Icons */
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+
+/* StyleSheets*/
 import "./SortingVizualizer.css";
+
+/* ALgorithms */
+import bubbleSort from "./Algorithms/BubbleSort";
+import selectionSort from "./Algorithms/SelectionSort";
 
 const useStyles = makeStyles({
   container: {
@@ -12,6 +22,18 @@ const useStyles = makeStyles({
     width: "100%",
     minHeight: 450,
     marginBottom: 30,
+  },
+  player: {
+    textAlign: "center",
+    backgroundColor: "#EDEFED",
+    height: 103,
+  },
+  icon: {
+    marginTop: "0px",
+    fontSize: 60,
+  },
+  typo: {
+    fontSize: 12,
   },
 });
 
@@ -30,7 +52,7 @@ const Vizualizer = () => {
     setArray(arr);
   };
 
-  /*const SelectionSortAnimated = () => {
+  const SelectionSortAnimated = () => {
     let animations = selectionSort(array);
     let animationArray = [];
     for (let animation of animations) {
@@ -38,7 +60,6 @@ const Vizualizer = () => {
       animationArray.push(animation.comparaison);
       animationArray.push(animation.swap);
     }
-    console.log(animationArray);
 
     for (let i = 0; i < animationArray.length; i++) {
       const arrayBars = document.getElementsByClassName("array-bar");
@@ -48,19 +69,28 @@ const Vizualizer = () => {
         const barOne = arrayBars[barOneIdx].style;
         const barTwo = arrayBars[barTwoIdx].style;
 
-        const color = i % 3 === 0 ? "red" : "rebeccapurple";
+        const color = i % 3 === 0 ? "red" : "#bfdbf7";
         setTimeout(() => {
           barOne.backgroundColor = color;
           barTwo.backgroundColor = color;
-        }, i * 300);
+        }, i * 200);
       } else if (animationArray[i] !== undefined) {
         // Swapping
         setTimeout(() => {
           let [barOneIdx, barTwoIdx] = animationArray[i];
-          let barOne = arrayBars[barOneIdx].style;
-          let barTwo = arrayBars[barTwoIdx].style;
+          var barOne = arrayBars[barOneIdx].style;
+          var barTwo = arrayBars[barTwoIdx].style;
+
+          [
+            document.getElementById(barOneIdx).innerHTML,
+            document.getElementById(barTwoIdx).innerHTML,
+          ] = [
+            document.getElementById(barTwoIdx).innerHTML,
+            document.getElementById(barOneIdx).innerHTML,
+          ];
+
           [barOne.height, barTwo.height] = [barTwo.height, barOne.height];
-        }, i * 300);
+        }, i * 200);
       }
     }
   };
@@ -90,18 +120,18 @@ const Vizualizer = () => {
       } else if (animationArray[i] !== undefined) {
         setTimeout(() => {
           let [barOneIdx, barTwoIdx] = animationArray[i];
-          let barOne = arrayBars[barOneIdx].style;
-          let barTwo = arrayBars[barTwoIdx].style;
-          [barOne.height, barTwo.height] = [barTwo.height, barOne.height];
+          let barOne = arrayBars[barOneIdx];
+          let barTwo = arrayBars[barTwoIdx];
+          [barOne, barTwo] = [barTwo, barOne];
         }, i * 1);
       }
     }
-  };*/
+  };
 
   const classes = useStyles();
 
   return (
-    <Grid item direction="column" spacing={2} container>
+    <Grid item direction="column" container style={{ padding: 0 }}>
       {/* Vizualizer Part */}
       <Grid container>
         <Grid item xs={1}></Grid>
@@ -118,21 +148,28 @@ const Vizualizer = () => {
                   style={{ height: `${value}px` }}
                   key={idx}
                 >
-                  <div className="values">{value}</div>
+                  <div className="values" id={idx}>
+                    {value}
+                  </div>
                 </div>
               ))}
             </Grid>
           </Paper>
         </Grid>
+        {/*TODO TERMINAL*/}
       </Grid>
 
       {/* Player Part */}
-      <Grid container>
-        <Grid item xs={5} />
-        <Grid item xs={2}>
-          <Paper>qsdsdq</Paper>
+      <Grid container item xs={12}>
+        <Grid item xs={12}>
+          <Paper className={classes.player}>
+            <Typography className={classes.typo}>
+              <IconButton onClick={() => SelectionSortAnimated()}>
+                <PlayCircleFilledIcon className={classes.icon} />
+              </IconButton>
+            </Typography>
+          </Paper>
         </Grid>
-        <Grid item xs={5} />
       </Grid>
     </Grid>
   );
