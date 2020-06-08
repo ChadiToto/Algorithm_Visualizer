@@ -11,8 +11,11 @@ export default function selectionSort(array) {
         min = j;
       }
     }
-    animation.comparaison = [min, i];
-    animation.swap = [min, i];
+    if (min !== i) {
+      // to prevent useless animations
+      animation.comparaison = [min, i];
+      animation.swap = [min, i];
+    }
     array[i] = array[min];
     array[min] = temp;
     animations.push(animation);
