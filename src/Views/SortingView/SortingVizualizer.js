@@ -1,9 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core";
-//import bubbleSort from "./SortAlgorithms/BubbleSort";
-//import selectionSort from "./SortAlgorithms/SelectionSort";
+import React from "react";
+import { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+
+import { Grid, Paper } from "@material-ui/core";
+
 import "./SortingVizualizer.css";
-function SortingVizualizer() {
+
+const useStyles = makeStyles({
+  container: {
+    backgroundColor: "#EDEFED",
+    width: "100%",
+    minHeight: 450,
+    marginBottom: 30,
+  },
+});
+
+const Vizualizer = () => {
   const [array, setArray] = useState([]);
 
   useEffect(() => {
@@ -86,23 +98,48 @@ function SortingVizualizer() {
     }
   };*/
 
+  const classes = useStyles();
+
   return (
-    <Grid
-      container
-      className="array-container"
-      style={{ transform: "rotate(180deg)" }}
-    >
-      {array.map((value, idx) => (
-        <div className="array-bar" style={{ height: `${value}px` }} key={idx}>
-          <div className="values">{value}</div>
-        </div>
-      ))}
+    <Grid item direction="column" spacing={2} container>
+      {/* Vizualizer Part */}
+      <Grid container>
+        <Grid item xs={1}></Grid>
+        <Grid item xs={10}>
+          <Paper className={classes.container}>
+            <Grid
+              container
+              className="array-container"
+              style={{ transform: "rotate(180deg)" }}
+            >
+              {array.map((value, idx) => (
+                <div
+                  className="array-bar"
+                  style={{ height: `${value}px` }}
+                  key={idx}
+                >
+                  <div className="values">{value}</div>
+                </div>
+              ))}
+            </Grid>
+          </Paper>
+        </Grid>
+      </Grid>
+
+      {/* Player Part */}
+      <Grid container>
+        <Grid item xs={5} />
+        <Grid item xs={2}>
+          <Paper>qsdsdq</Paper>
+        </Grid>
+        <Grid item xs={5} />
+      </Grid>
     </Grid>
   );
-}
+};
 
 function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export default SortingVizualizer;
+export default Vizualizer;

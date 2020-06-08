@@ -14,9 +14,7 @@ function App() {
         <Header></Header>
       </Grid>
 
-      <Grid item direction="column" spacing={2} container>
-        <Vizualizer></Vizualizer>
-      </Grid>
+      <Vizualizer></Vizualizer>
     </Grid>
   );
 }
