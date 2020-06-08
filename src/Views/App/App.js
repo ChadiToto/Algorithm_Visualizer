@@ -5,7 +5,7 @@ import { Grid } from "@material-ui/core";
 import Header from "../../Components/Header";
 
 //import Home from "../Main/Home";
-import Vizualizer from "../VisualizerView/Visualizer";
+import SortingVizualizer from "../SortingView/SortingVizualizer";
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
         <Header></Header>
       </Grid>
 
-      <Vizualizer></Vizualizer>
+      <SortingVizualizer></SortingVizualizer>
     </Grid>
   );
 }
