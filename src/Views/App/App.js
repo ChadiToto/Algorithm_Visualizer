@@ -4,7 +4,8 @@ import { Grid } from "@material-ui/core";
 
 import Header from "../../Components/Header";
 
-import Home from "../Main/Home";
+//import Home from "../Main/Home";
+import Vizualizer from "../VisualizerView/Visualizer";
 
 function App() {
   return (
@@ -13,8 +14,8 @@ function App() {
         <Header></Header>
       </Grid>
 
-      <Grid item direction="column" spacing={5} container>
-        <Home></Home>
+      <Grid item direction="column" spacing={2} container>
+        <Vizualizer></Vizualizer>
       </Grid>
     </Grid>
   );

@@ -1,0 +1,23 @@
+.array-container {
+  height: 400px;
+  margin-top: 2px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.array-bar {
+  width: 5.2vw;
+  background-color: #bfdbf7;
+  display: inline;
+  margin: 0 5px;
+}
+
+.values {
+  font-family: "Roboto";
+  text-align: center;
+  transform: rotate(180deg);
+  font-weight: bold;
+  font-size: 0.9em;
+  padding-bottom: 40px;
+}

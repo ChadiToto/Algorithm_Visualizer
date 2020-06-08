@@ -22,7 +22,7 @@ let data = [
     heading: "Data Structures",
     children: [
       {
-        title: "LinkedList",
+        title: "LinkedLists",
         desc: "Vizualize how linkedlist works by exploring basic operations.",
         image:
           "https://static.vecteezy.com/system/resources/thumbnails/000/668/775/small/elegant-valentine-gradient-background.jpg",
