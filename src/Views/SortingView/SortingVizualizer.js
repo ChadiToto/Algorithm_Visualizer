@@ -4,10 +4,7 @@ import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 /* Material UI Components */
-import { Grid, Paper, Typography, IconButton } from "@material-ui/core";
-
-/* Icons */
-import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import { Grid, Paper } from "@material-ui/core";
 
 /* StyleSheets*/
 import "./SortingVizualizer.css";
@@ -16,24 +13,15 @@ import "./SortingVizualizer.css";
 import bubbleSort from "./Algorithms/BubbleSort";
 import selectionSort from "./Algorithms/SelectionSort";
 
+/* Custom Components */
+import Player from "../../Components/Player";
+
 const useStyles = makeStyles({
   container: {
     backgroundColor: "#EDEFED",
     width: "100%",
     minHeight: 450,
     marginBottom: 30,
-  },
-  player: {
-    textAlign: "center",
-    backgroundColor: "#EDEFED",
-    height: 103,
-  },
-  icon: {
-    marginTop: "0px",
-    fontSize: 60,
-  },
-  typo: {
-    fontSize: 12,
   },
 });
 
@@ -129,6 +117,24 @@ const Vizualizer = () => {
   };
 
   const classes = useStyles();
+  let sortMethods = [
+    {
+      title: "Selection Sort",
+      method: SelectionSortAnimated,
+    },
+    {
+      title: "Bubble Sort",
+      method: SelectionSortAnimated,
+    },
+    {
+      title: "Quick Sort",
+      method: SelectionSortAnimated,
+    },
+    {
+      title: "Merge Sort",
+      method: SelectionSortAnimated,
+    },
+  ];
 
   return (
     <Grid item direction="column" container style={{ padding: 0 }}>
@@ -160,17 +166,7 @@ const Vizualizer = () => {
       </Grid>
 
       {/* Player Part */}
-      <Grid container item xs={12}>
-        <Grid item xs={12}>
-          <Paper className={classes.player}>
-            <Typography className={classes.typo}>
-              <IconButton onClick={() => SelectionSortAnimated()}>
-                <PlayCircleFilledIcon className={classes.icon} />
-              </IconButton>
-            </Typography>
-          </Paper>
-        </Grid>
-      </Grid>
+      <Player sort={sortMethods} reset={resetArray}></Player>
     </Grid>
   );
 };
