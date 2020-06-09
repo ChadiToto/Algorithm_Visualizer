@@ -110,6 +110,14 @@ const Vizualizer = () => {
           let [barOneIdx, barTwoIdx] = animationArray[i];
           let barOne = arrayBars[barOneIdx].style;
           let barTwo = arrayBars[barTwoIdx].style;
+          [
+            document.getElementById(barOneIdx).innerHTML,
+            document.getElementById(barTwoIdx).innerHTML,
+          ] = [
+            document.getElementById(barTwoIdx).innerHTML,
+            document.getElementById(barOneIdx).innerHTML,
+          ];
+
           [barOne.height, barTwo.height] = [barTwo.height, barOne.height];
         }, i * 200);
       }
