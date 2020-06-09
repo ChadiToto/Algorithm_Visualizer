@@ -100,18 +100,18 @@ const Vizualizer = () => {
         const barOne = arrayBars[barOneIdx].style;
         const barTwo = arrayBars[barTwoIdx].style;
 
-        const color = i % 3 === 0 ? "red" : "rebeccapurple";
+        const color = i % 3 === 0 ? "red" : "#bfdbf7";
         setTimeout(() => {
           barOne.backgroundColor = color;
           barTwo.backgroundColor = color;
-        }, i * 1);
+        }, i * 200);
       } else if (animationArray[i] !== undefined) {
         setTimeout(() => {
           let [barOneIdx, barTwoIdx] = animationArray[i];
-          let barOne = arrayBars[barOneIdx];
-          let barTwo = arrayBars[barTwoIdx];
-          [barOne, barTwo] = [barTwo, barOne];
-        }, i * 1);
+          let barOne = arrayBars[barOneIdx].style;
+          let barTwo = arrayBars[barTwoIdx].style;
+          [barOne.height, barTwo.height] = [barTwo.height, barOne.height];
+        }, i * 200);
       }
     }
   };
@@ -124,7 +124,11 @@ const Vizualizer = () => {
     },
     {
       title: "Bubble Sort",
-      method: SelectionSortAnimated,
+      method: bubbleSortAnimated,
+    },
+    {
+      title: "Insertion Sort",
+      method: bubbleSortAnimated,
     },
     {
       title: "Quick Sort",
