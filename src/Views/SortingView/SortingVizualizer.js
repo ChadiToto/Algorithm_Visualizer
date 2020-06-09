@@ -178,7 +178,7 @@ const Vizualizer = () => {
       </Grid>
 
       {/* Player Part */}
-      <Player sort={sortMethods} reset={resetArray}></Player>
+      <Player options={sortMethods} reset={resetArray}></Player>
     </Grid>
   );
 };

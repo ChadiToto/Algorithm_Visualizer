@@ -1,10 +1,18 @@
+/* React Main Features */
 import React from "react";
+import { useState } from "react";
+
+/* Material UI Features */
 import { makeStyles } from "@material-ui/core/styles";
 
+/* Material UI Components */
+import { Grid, Paper, Typography, IconButton, Button } from "@material-ui/core";
+
+/* Material UI Icons */
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import CachedIcon from "@material-ui/icons/Cached";
 
-import { Grid, Paper, Typography, IconButton, Button } from "@material-ui/core";
+var method = null;
 
 const useStyles = makeStyles({
   player: {
@@ -24,10 +32,25 @@ const useStyles = makeStyles({
   item: {
     fontSize: 10,
   },
+  active: {
+    fontWeight: "bold",
+    fontSize: "70%",
+  },
 });
 
 const Player = (props) => {
-  console.log(props.sort);
+  const [active, setActive] = useState();
+
+  const isActive = (id) => {
+    return active === document.getElementById("option_" + id);
+  };
+
+  const setActiveMethod = (fct, id) => {
+    let option = document.getElementById("option_" + id);
+    method = fct;
+    setActive(option);
+  };
+
   const classes = useStyles();
   return (
     <Grid container item xs={12}>
@@ -37,15 +60,20 @@ const Player = (props) => {
             <IconButton onClick={props.reset}>
               <CachedIcon className={classes.reset}></CachedIcon>
             </IconButton>
-            <IconButton style={{ padding: "6px" }}>
+            <IconButton style={{ padding: "6px" }} onClick={() => method()}>
               <PlayCircleFilledIcon className={classes.play} />
             </IconButton>
             <IconButton className={classes.reset}>x2</IconButton>
           </Typography>
           <div>
-            {props.sort.map((item) => {
+            {props.options.map((item, id) => {
               return (
-                <Button className={classes.item} onClick={item.method}>
+                <Button
+                  key={id}
+                  id={"option_" + id}
+                  className={isActive(id) ? classes.active : classes.item}
+                  onClick={() => setActiveMethod(item.method, id)}
+                >
                   {item.title}
                 </Button>
               );
