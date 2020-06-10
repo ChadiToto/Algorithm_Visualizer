@@ -11,6 +11,8 @@ import { Grid, Paper, Typography, IconButton, Button } from "@material-ui/core";
 /* Material UI Icons */
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import CachedIcon from "@material-ui/icons/Cached";
+import ReplayIcon from "@material-ui/icons/Replay";
+import TimerIcon from "@material-ui/icons/Timer";
 
 var method = null;
 
@@ -57,6 +59,9 @@ const Player = (props) => {
       <Grid item xs={12}>
         <Paper className={classes.player}>
           <Typography className={classes.typo} style={{ paddingTop: "2px" }}>
+            <IconButton onClick={props.undo}>
+              <ReplayIcon className={classes.reset}></ReplayIcon>
+            </IconButton>
             <IconButton onClick={props.reset}>
               <CachedIcon className={classes.reset}></CachedIcon>
             </IconButton>
@@ -64,6 +69,9 @@ const Player = (props) => {
               <PlayCircleFilledIcon className={classes.play} />
             </IconButton>
             <IconButton className={classes.reset}>x2</IconButton>
+            <IconButton>
+              <TimerIcon className={classes.reset}></TimerIcon>
+            </IconButton>
           </Typography>
           <div>
             {props.options.map((item, id) => {

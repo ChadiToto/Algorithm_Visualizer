@@ -27,6 +27,7 @@ const useStyles = makeStyles({
 
 const Vizualizer = () => {
   const [array, setArray] = useState([]);
+  const [oldArray, setOldArray] = useState([]);
 
   useEffect(() => {
     resetArray();
@@ -38,6 +39,15 @@ const Vizualizer = () => {
       arr.push(randomIntFromInterval(5, 400));
     }
     setArray(arr);
+    setOldArray([...arr]);
+  };
+
+  const shuffleArray = () => {
+    setArray([]);
+    // Refresh Effect
+    setTimeout(() => {
+      setArray(oldArray);
+    }, 1);
   };
 
   const SelectionSortAnimated = () => {
@@ -178,7 +188,11 @@ const Vizualizer = () => {
       </Grid>
 
       {/* Player Part */}
-      <Player options={sortMethods} reset={resetArray}></Player>
+      <Player
+        options={sortMethods}
+        reset={resetArray}
+        undo={shuffleArray}
+      ></Player>
     </Grid>
   );
 };
