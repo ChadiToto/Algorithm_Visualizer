@@ -1,4 +1,11 @@
-export default function getMergeSortAnimations(array) {
+/**
+ * ALL of the below is associated with the MergeSort Algorithm
+ * Fun fact : This was the one i hated the most before i actually took the time and understood it
+ * @param {array} array to be sorted
+ * @returns {array} of animations to be displayed in the vizualizer
+ */
+
+export default function mergeSort(array) {
   const animations = [];
   if (array.length <= 1) return array;
   const auxiliaryArray = array.slice();
@@ -6,6 +13,16 @@ export default function getMergeSortAnimations(array) {
   return animations;
 }
 
+/**
+ * This Function takes care of the divide & conquer aspect of the algorithm
+ * How does mergeSort Work? https://www.youtube.com/watch?v=4VqmGXwpLqc
+ *
+ * @param {*} mainArray
+ * @param {*} startIdx
+ * @param {*} endIdx
+ * @param {*} auxiliaryArray
+ * @param {*} animations
+ */
 function mergeSortHelper(
   mainArray,
   startIdx,

@@ -61,7 +61,6 @@ const SortingVizualizer = () => {
       animationArray.push(animation.comparaison);
       animationArray.push(animation.swap);
     }
-    //console.log(animationArray);
 
     for (let i = 0; i < animationArray.length; i++) {
       const arrayBars = document.getElementsByClassName("array-bar");
@@ -195,7 +194,6 @@ const SortingVizualizer = () => {
             </Grid>
           </Paper>
         </Grid>
-        {/*TODO TERMINAL*/}
       </Grid>
 
       {/* Player Part */}

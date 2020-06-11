@@ -1,3 +1,11 @@
+/**
+ *InsertionSort algorithm
+ *How does it work ? https://www.youtube.com/watch?v=JU767SDMDvA
+ *
+ * @param {array} array
+ * @returns {array} of animation to be displayed in visualizer
+ */
+
 export default function insertionSort(array) {
   let animations = [];
   for (let i = 1; i < array.length; i++) {

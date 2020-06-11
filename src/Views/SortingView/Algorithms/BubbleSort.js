@@ -1,3 +1,11 @@
+/**
+ *BubbleSort Algorithm
+ * How does it work? https://www.youtube.com/watch?v=xli_FI7CuzA
+ *
+ * @param {array} array to be sorted
+ * @returns {array} of animations to be displayed on vizualizer
+ */
+
 export default function bubbleSort(array) {
   var animations = [];
   const length = array.length;
@@ -6,7 +14,6 @@ export default function bubbleSort(array) {
       var animation = {};
       animation.comparaison = [j, j + 1];
       if (array[j] < array[j + 1]) {
-        //Swap Numbers
         [array[j], array[j + 1]] = [array[j + 1], array[j]];
         animation.swap = [j, j + 1];
       }

@@ -3,8 +3,8 @@ var animations = [];
 /**
  * This function Triggers QuickSort Algorithm
  *
- * @param {Array} array to be sorted
- * @returns {Array} of animations to be displayed on visualizer
+ * @param {array} array to be sorted
+ * @returns {array} of animations to be displayed on visualizer
  */
 export default function triggerFunction(array) {
   quickSort(array, 0, array.length - 1);
@@ -15,10 +15,10 @@ export default function triggerFunction(array) {
  *ALL of the below is associated with the QuickSort Algorithm
  * How does quickSort work ? https://www.youtube.com/watch?v=Hoixgm4-P4M
  *
- * @param {Array} array to be sorted
+ * @param {array} array to be sorted
  * @param {Number} left start Index
  * @param {Number} right end Index
- * @returns {Array} sorted array
+ * @returns {array} sorted array
  */
 
 function quickSort(array, left, right) {

@@ -1,3 +1,10 @@
+/**
+ * SelectionSort Algorithm
+ * How does it work? https://www.youtube.com/watch?v=g-PGLbMth_g
+ *
+ * @param {array} array to be sorted
+ * @returns {array} of animations to be displayed on vizualizer
+ */
 export default function selectionSort(array) {
   const length = array.length;
   var animations = [];
@@ -12,7 +19,7 @@ export default function selectionSort(array) {
       }
     }
     if (min !== i) {
-      // to prevent useless animations
+      // This condition is only to prevent useless animations
       animation.comparaison = [min, i];
       animation.swap = [min, i];
     }
