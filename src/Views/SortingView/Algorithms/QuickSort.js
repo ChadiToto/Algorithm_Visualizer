@@ -48,8 +48,8 @@ function partition(array, pivot, left, right) {
 
   for (let i = left; i < right; i++) {
     let animation = {};
+    animation.comparaison = [i, pivot];
     if (array[i] > pivotValue) {
-      animation.comparaison = [i, pivot];
       [array[i], array[partitionIndex]] = [array[partitionIndex], array[i]];
       animation.swap = [i, partitionIndex];
       partitionIndex++;
