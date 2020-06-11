@@ -13,6 +13,7 @@ import "./SortingVizualizer.css";
 import bubbleSort from "./Algorithms/BubbleSort";
 import selectionSort from "./Algorithms/SelectionSort";
 import insertionSort from "./Algorithms/InsertionSort";
+import quickSort from "./Algorithms/QuickSort";
 
 /* Custom Components */
 import Player from "../../Components/Player";
@@ -59,6 +60,7 @@ const SortingVizualizer = () => {
       animationArray.push(animation.comparaison);
       animationArray.push(animation.swap);
     }
+    //console.log(animationArray);
 
     for (let i = 0; i < animationArray.length; i++) {
       const arrayBars = document.getElementsByClassName("array-bar");
@@ -124,6 +126,9 @@ const SortingVizualizer = () => {
       case 2: // Insertion Sort
         setAnimations(insertionSort);
         break;
+      case 3:
+        setAnimations(quickSort);
+        break;
       default:
         console.error("Invalid Algorithm");
     }
@@ -132,9 +137,11 @@ const SortingVizualizer = () => {
   const classes = useStyles();
 
   /**
-   * Associate Every Algorithm with its Function
-   * This variable is passed to child components as props
-   * @type {array}
+   * Associate Every Algorithm with the setSorting function with
+   * the appropriate "algorithm" parameter.
+   *
+   * This variable is passed to child components as props.
+   * @type {Array}
    */
   let sortMethods = [
     {
@@ -151,7 +158,7 @@ const SortingVizualizer = () => {
     },
     {
       title: "Quick Sort",
-      method: () => setSortingAlgo(0),
+      method: () => setSortingAlgo(3),
     },
     {
       title: "Merge Sort",
