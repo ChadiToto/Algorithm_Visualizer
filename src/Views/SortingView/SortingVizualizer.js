@@ -14,6 +14,7 @@ import bubbleSort from "./Algorithms/BubbleSort";
 import selectionSort from "./Algorithms/SelectionSort";
 import insertionSort from "./Algorithms/InsertionSort";
 import quickSort from "./Algorithms/QuickSort";
+import mergeSort from "./Algorithms/MergeSort";
 
 /* Custom Components */
 import Player from "../../Components/Player";
@@ -74,7 +75,7 @@ const SortingVizualizer = () => {
         setTimeout(() => {
           barOne.backgroundColor = color;
           barTwo.backgroundColor = color;
-        }, i * 200);
+        }, i * 100);
       } else if (animationArray[i] !== undefined) {
         // Swapping
         setTimeout(() => {
@@ -91,7 +92,7 @@ const SortingVizualizer = () => {
           ];
 
           [barOne.height, barTwo.height] = [barTwo.height, barOne.height];
-        }, i * 200);
+        }, i * 100);
       }
     }
   };
@@ -112,7 +113,6 @@ const SortingVizualizer = () => {
    * animation depending on the input of "algortihm".
    *
    * @param {number} algortihm The Algorithm to be animated
-   * @todo Add quickSort
    * @todo Add mergeSort
    */
   const setSortingAlgo = (algortihm) => {
@@ -129,6 +129,9 @@ const SortingVizualizer = () => {
       case 3:
         setAnimations(quickSort);
         break;
+      case 4:
+        setAnimations(mergeSort);
+        break;
       default:
         console.error("Invalid Algorithm");
     }
@@ -141,7 +144,7 @@ const SortingVizualizer = () => {
    * the appropriate "algorithm" parameter.
    *
    * This variable is passed to child components as props.
-   * @type {Array}
+   * @type {array}
    */
   let sortMethods = [
     {
