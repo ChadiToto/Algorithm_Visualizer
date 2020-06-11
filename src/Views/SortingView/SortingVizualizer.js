@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Vizualizer = () => {
+const SortingVizualizer = () => {
   const [array, setArray] = useState([]);
   const [oldArray, setOldArray] = useState([]);
 
@@ -34,6 +34,9 @@ const Vizualizer = () => {
     resetArray();
   }, []);
 
+  /**
+   * Generates new array
+   */
   const resetArray = () => {
     const arr = [];
     for (let i = 0; i < randomIntFromInterval(5, 12); i++) {
@@ -43,6 +46,11 @@ const Vizualizer = () => {
     setOldArray([...arr]);
   };
 
+  /**
+   * Displays sorting animation on the Vizualizer
+   *
+   * @param {function} fct The sorting function to be called from ./Algorithms
+   */
   const setAnimations = (fct) => {
     let animations = fct(array);
     let animationArray = [];
@@ -87,7 +95,7 @@ const Vizualizer = () => {
   };
 
   /**
-   *
+   * Undo any Sorting to the array and reverts it back
    */
   const shuffleArray = () => {
     setArray([]);
@@ -98,47 +106,56 @@ const Vizualizer = () => {
   };
 
   /**
+   * Calls the setAnimations function to start the sorting
+   * animation depending on the input of "algortihm".
    *
+   * @param {number} algortihm The Algorithm to be animated
+   * @todo Add quickSort
+   * @todo Add mergeSort
    */
-  const SelectionSortAnimated = () => {
-    setAnimations(selectionSort);
-  };
-
-  /**
-   *
-   */
-  const bubbleSortAnimated = () => {
-    setAnimations(bubbleSort);
-  };
-
-  /**
-   *
-   */
-  const insertionSortAnimated = () => {
-    setAnimations(insertionSort);
+  const setSortingAlgo = (algortihm) => {
+    switch (algortihm) {
+      case 0: // Selection Sort
+        setAnimations(selectionSort);
+        break;
+      case 1: // Bubble Sort
+        setAnimations(bubbleSort);
+        break;
+      case 2: // Insertion Sort
+        setAnimations(insertionSort);
+        break;
+      default:
+        console.error("Invalid Algorithm");
+    }
   };
 
   const classes = useStyles();
+
+  /**
+   * Associate Every Algorithm with its Function
+   * This variable is passed to child components as props
+   * @type {array}
+   */
   let sortMethods = [
     {
       title: "Selection Sort",
-      method: SelectionSortAnimated,
+      method: () => setSortingAlgo(0),
     },
     {
       title: "Bubble Sort",
-      method: bubbleSortAnimated,
+      method: () => setSortingAlgo(1),
     },
     {
       title: "Insertion Sort",
-      method: insertionSortAnimated,
+      method: () => setSortingAlgo(2),
     },
     {
       title: "Quick Sort",
-      method: SelectionSortAnimated,
+      method: () => setSortingAlgo(0),
     },
     {
       title: "Merge Sort",
-      method: SelectionSortAnimated,
+      method: () => setSortingAlgo(0),
     },
   ];
 
@@ -185,4 +202,4 @@ function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export default Vizualizer;
+export default SortingVizualizer;
