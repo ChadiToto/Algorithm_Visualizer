@@ -1,4 +1,5 @@
-var animations = [];
+/* 3rd Party Libraries */
+import _ from "lodash";
 
 /**
  * This function Triggers QuickSort Algorithm
@@ -7,7 +8,9 @@ var animations = [];
  * @returns {array} of animations to be displayed on visualizer
  */
 export default function triggerFunction(array) {
-  quickSort(array, 0, array.length - 1);
+  let animations = [];
+
+  if (!isSorted(array)) quickSort(array, 0, array.length - 1, animations);
   return animations;
 }
 
@@ -21,15 +24,15 @@ export default function triggerFunction(array) {
  * @returns {array} sorted array
  */
 
-function quickSort(array, left, right) {
+function quickSort(array, left, right, animations) {
   let pivot;
   let partitionIndex;
 
   if (left < right) {
     pivot = right;
-    partitionIndex = partition(array, pivot, left, right);
-    quickSort(array, left, partitionIndex - 1);
-    quickSort(array, partitionIndex + 1, right);
+    partitionIndex = partition(array, pivot, left, right, animations);
+    quickSort(array, left, partitionIndex - 1, animations);
+    quickSort(array, partitionIndex + 1, right, animations);
   }
   return array;
 }
@@ -42,7 +45,7 @@ function quickSort(array, left, right) {
  * @param {*} left start Index
  * @param {*} right end Index
  */
-function partition(array, pivot, left, right) {
+function partition(array, pivot, left, right, animations) {
   let pivotValue = array[pivot];
   let partitionIndex = left;
 
@@ -62,4 +65,13 @@ function partition(array, pivot, left, right) {
   animation.swap = [right, partitionIndex];
   animations.push(animation);
   return partitionIndex;
+}
+
+function isSorted(array) {
+  let sorted = [...array];
+  sorted = sorted.sort((a, b) => {
+    return b - a;
+  });
+  console.log(_.isEqual(array, sorted));
+  return _.isEqual(array, sorted);
 }
