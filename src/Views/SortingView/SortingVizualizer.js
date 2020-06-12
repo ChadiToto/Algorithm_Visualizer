@@ -103,7 +103,7 @@ const SortingVizualizer = () => {
     setArray([]);
     // Refresh Effect
     setTimeout(() => {
-      setArray(oldArray);
+      setArray([...oldArray]);
     }, 1);
   };
 
