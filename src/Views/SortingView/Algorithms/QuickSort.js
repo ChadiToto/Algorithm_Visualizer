@@ -1,5 +1,4 @@
-/* 3rd Party Libraries */
-import _ from "lodash";
+import isSorted from "./isSorted";
 
 /**
  * This function Triggers QuickSort Algorithm
@@ -65,13 +64,4 @@ function partition(array, pivot, left, right, animations) {
   animation.swap = [right, partitionIndex];
   animations.push(animation);
   return partitionIndex;
-}
-
-function isSorted(array) {
-  let sorted = [...array];
-  sorted = sorted.sort((a, b) => {
-    return b - a;
-  });
-  console.log(_.isEqual(array, sorted));
-  return _.isEqual(array, sorted);
 }
