@@ -3,9 +3,12 @@
  * How does it work? https://www.youtube.com/watch?v=g-PGLbMth_g
  *
  * @param {array} array to be sorted
- * @returns {array} of animations to be displayed on vizualizer
+ * @returns {object} of animations to be displayed on vizualizer
+ * and the time it took for the function to finish
  */
 export default function selectionSort(array) {
+  var timer_start = performance.now();
+
   const length = array.length;
   var animations = [];
   for (let i = 0; i < length; i++) {
@@ -27,5 +30,7 @@ export default function selectionSort(array) {
     array[min] = temp;
     animations.push(animation);
   }
-  return animations;
+  var timer_end = performance.now();
+  var time = timer_end - timer_start;
+  return { animations, time };
 }

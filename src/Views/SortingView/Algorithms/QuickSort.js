@@ -4,13 +4,17 @@ import isSorted from "./isSorted";
  * This function Triggers QuickSort Algorithm
  *
  * @param {array} array to be sorted
- * @returns {array} of animations to be displayed on visualizer
+ * @returns {object} of animations to be displayed on vizualizer
+ * and the time it took for the function to finish
  */
 export default function triggerFunction(array) {
   let animations = [];
+  var timer_start = performance.now();
 
   if (!isSorted(array)) quickSort(array, 0, array.length - 1, animations);
-  return animations;
+  var timer_end = performance.now();
+  var time = timer_end - timer_start;
+  return { animations, time };
 }
 
 /**

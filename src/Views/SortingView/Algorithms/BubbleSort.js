@@ -5,10 +5,12 @@ import isSorted from "./isSorted";
  * How does it work? https://www.youtube.com/watch?v=xli_FI7CuzA
  *
  * @param {array} array to be sorted
- * @returns {array} of animations to be displayed on vizualizer
+ * @returns {object} of animations to be displayed on vizualizer
+ * and the time it took for the function to finish
  */
 
 export default function bubbleSort(array) {
+  var timer_start = performance.now();
   var animations = [];
   const length = array.length;
   for (let i = 0; i < length; i++) {
@@ -23,5 +25,7 @@ export default function bubbleSort(array) {
       animations.push(animation);
     }
   }
-  return animations;
+  var timer_end = performance.now();
+  var time = timer_end - timer_start;
+  return { animations, time };
 }

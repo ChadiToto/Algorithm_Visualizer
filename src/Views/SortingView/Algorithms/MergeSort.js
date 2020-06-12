@@ -2,15 +2,20 @@
  * ALL of the below is associated with the MergeSort Algorithm
  * Fun fact : This was the one i hated the most before i actually took the time and understood it
  * @param {array} array to be sorted
- * @returns {array} of animations to be displayed in the vizualizer
+ * @returns {object} of animations to be displayed on vizualizer
+ * and the time it took for the function to finish
  */
 
 export default function mergeSort(array) {
+  var timer_start = performance.now();
   let animations = [];
   if (array.length <= 1) return array;
   const auxiliaryArray = array.slice();
+
   mergeSortHelper(array, 0, array.length - 1, auxiliaryArray, animations);
-  return animations;
+  var timer_end = performance.now();
+  var time = timer_end - timer_start;
+  return { animations, time };
 }
 
 /**

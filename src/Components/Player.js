@@ -14,6 +14,8 @@ import CachedIcon from "@material-ui/icons/Cached";
 import ReplayIcon from "@material-ui/icons/Replay";
 import TimerIcon from "@material-ui/icons/Timer";
 
+import { toast } from "react-toastify";
+
 var method = null;
 
 const useStyles = makeStyles({
@@ -38,22 +40,72 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     fontSize: "70%",
   },
+  timerTitle: {
+    fontSize: 14,
+    lineHeight: 2,
+    fontWeight: "bold",
+  },
+  timerElements: {
+    fontSize: 14,
+    lineHeight: 1.5,
+  },
 });
 
 const Player = (props) => {
   const [active, setActive] = useState();
+  const classes = useStyles();
 
+  /**
+   * Displays a toast containing The algorithms and their
+   * runtime on the current vizualized element
+   */
+  const displayTime = () => {
+    toast.info(
+      <div>
+        <div className={classes.timerTitle}>{props.time.title}</div>
+        {props.time.algorithms.map((algo) => {
+          return (
+            <div className={classes.timerElements}>
+              {algo.title} : {algo.time.toFixed(2)} ms
+            </div>
+          );
+        })}
+      </div>,
+      {
+        position: "top-right",
+        autoClose: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
+  };
+
+  /**
+   * Check if the item is active
+   * This is used to set CSS for the active element on the list
+   * of algorithms.
+   *
+   * @param {string} id
+   * @returns {boolean}
+   */
   const isActive = (id) => {
     return active === document.getElementById("option_" + id);
   };
 
+  /**
+   * Set the active element associated function to the "Play Button"
+   *
+   * @param {*} fct is the algorithm to be vizualized
+   * @param {*} id is the active element's id
+   */
   const setActiveMethod = (fct, id) => {
     let option = document.getElementById("option_" + id);
     method = fct;
     setActive(option);
   };
 
-  const classes = useStyles();
   return (
     <Grid container item xs={12}>
       <Grid item xs={12}>
@@ -69,7 +121,7 @@ const Player = (props) => {
               <PlayCircleFilledIcon className={classes.play} />
             </IconButton>
             <IconButton className={classes.reset}>x2</IconButton>
-            <IconButton>
+            <IconButton onClick={() => displayTime()}>
               <TimerIcon className={classes.reset}></TimerIcon>
             </IconButton>
           </Typography>

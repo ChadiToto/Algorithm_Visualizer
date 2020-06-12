@@ -3,10 +3,12 @@
  *How does it work ? https://www.youtube.com/watch?v=JU767SDMDvA
  *
  * @param {array} array
- * @returns {array} of animation to be displayed in visualizer
+ * @returns {object} of animations to be displayed on vizualizer
+ * and the time it took for the function to finish
  */
 
 export default function insertionSort(array) {
+  var timer_start = performance.now();
   let animations = [];
   for (let i = 1; i < array.length; i++) {
     let key = array[i];
@@ -23,5 +25,7 @@ export default function insertionSort(array) {
       animations.push(animation);
     }
   }
-  return animations;
+  var timer_end = performance.now();
+  var time = timer_end - timer_start;
+  return { animations, time };
 }

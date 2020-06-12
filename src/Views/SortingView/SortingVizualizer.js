@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-/* Material UI Components */
+/* 3rd Party Components */
 import { Grid, Paper } from "@material-ui/core";
 
 /* StyleSheets*/
@@ -37,7 +37,7 @@ const SortingVizualizer = () => {
   }, []);
 
   /**
-   * Generates new array
+   * Generates new array thats going to be displayed on Vizualizer
    */
   const resetArray = () => {
     const arr = [];
@@ -49,12 +49,23 @@ const SortingVizualizer = () => {
   };
 
   /**
+   * Undo any Sorting to the array and reverts it back
+   */
+  const undo = () => {
+    setArray([]);
+    // Refresh Effect
+    setTimeout(() => {
+      setArray([...oldArray]);
+    }, 1);
+  };
+
+  /**
    * Displays sorting animation on the Vizualizer
    *
    * @param {function} fct The sorting function to be called from ./Algorithms
    */
   const setAnimations = (fct) => {
-    let animations = fct(array);
+    let animations = fct(array).animations;
     let animationArray = [];
     for (let animation of animations) {
       animationArray.push(animation.comparaison);
@@ -97,14 +108,14 @@ const SortingVizualizer = () => {
   };
 
   /**
-   * Undo any Sorting to the array and reverts it back
+   * Returns the time in ms that took to sort the array
+   * using a certain algorithm
+   *
+   * @param {function} fct to be used for sorting
+   * @returns {number} time in ms
    */
-  const shuffleArray = () => {
-    setArray([]);
-    // Refresh Effect
-    setTimeout(() => {
-      setArray([...oldArray]);
-    }, 1);
+  const getTime = (fct) => {
+    return fct(oldArray).time;
   };
 
   /**
@@ -145,7 +156,7 @@ const SortingVizualizer = () => {
    * This variable is passed to child components as props.
    * @type {array}
    */
-  let sortMethods = [
+  const sortMethods = [
     {
       title: "Selection Sort",
       method: () => setSortingAlgo(0),
@@ -167,6 +178,39 @@ const SortingVizualizer = () => {
       method: () => setSortingAlgo(0),
     },
   ];
+
+  /**
+   * Associate Every Algorithm with the time it takes to sort
+   * a 10K length array.
+   *
+   * This variable is passed to child components as props.
+   * @type {object}
+   */
+  const timeMethods = {
+    title: "Sorting this Array Took :",
+    algorithms: [
+      {
+        title: "Selection Sort",
+        time: getTime(selectionSort, array),
+      },
+      {
+        title: "Bubble Sort",
+        time: getTime(bubbleSort, array),
+      },
+      {
+        title: "Insertion Sort",
+        time: getTime(insertionSort, array),
+      },
+      {
+        title: "Quick Sort",
+        time: getTime(quickSort, array),
+      },
+      {
+        title: "Merge Sort",
+        time: getTime(mergeSort, array),
+      },
+    ],
+  };
 
   return (
     <Grid item direction="column" container style={{ padding: 0 }}>
@@ -200,12 +244,20 @@ const SortingVizualizer = () => {
       <Player
         options={sortMethods}
         reset={resetArray}
-        undo={shuffleArray}
+        undo={undo}
+        time={timeMethods}
       ></Player>
     </Grid>
   );
 };
 
+/**
+ * Generates a random number between min and max values
+ *
+ * @param {number } min
+ * @param {number} max
+ * @returns {number}
+ */
 function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }

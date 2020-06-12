@@ -1,4 +1,8 @@
 import React from "react";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import "fontsource-roboto";
 import { Grid } from "@material-ui/core";
 
@@ -14,7 +18,19 @@ function App() {
         <Header></Header>
       </Grid>
 
-      <SortingVizualizer></SortingVizualizer>
+      <div>
+        <ToastContainer
+          position="top-right"
+          autoClose={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          limit={1}
+          pauseOnFocusLoss
+          draggable
+        />
+        <SortingVizualizer></SortingVizualizer>
+      </div>
     </Grid>
   );
 }
