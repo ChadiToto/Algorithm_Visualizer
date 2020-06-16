@@ -9,7 +9,9 @@ import { Grid } from "@material-ui/core";
 import Header from "../../Components/Header";
 
 //import Home from "../Main/Home";
-import SortingVizualizer from "../SortingView/SortingVizualizer";
+//import SortingVizualizer from "../SortingView/SortingVizualizer";
+
+import FinderVizualizer from "../FinderView/FinderVizualizer";
 
 function App() {
   return (
@@ -29,7 +31,7 @@ function App() {
           pauseOnFocusLoss
           draggable
         />
-        <SortingVizualizer></SortingVizualizer>
+        <FinderVizualizer></FinderVizualizer>
       </div>
     </Grid>
   );
