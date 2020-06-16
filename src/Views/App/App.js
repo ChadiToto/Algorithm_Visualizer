@@ -15,7 +15,7 @@ import FinderVizualizer from "../FinderView/FinderVizualizer";
 
 function App() {
   return (
-    <Grid container direction="column" spacing={6}>
+    <Grid container direction="column" spacing={0}>
       <Grid item xs={12}>
         <Header></Header>
       </Grid>
