@@ -47,15 +47,19 @@ const FinderVizualizer = () => {
     stroked: true,
     filled: true,
     radiusScale: 10,
-    radiusMinPixels: 8,
+    radiusMinPixels: 5,
     radiusMaxPixels: 100,
     lineWidthMinPixels: 1,
     getPosition: (d) => d.coordinates,
     getRadius: (d) => Math.sqrt(d.exits),
-    getFillColor: (d) => [220, 20, 60],
-    getLineColor: (d) => [0, 0, 0],
+    getFillColor: (d) => {
+      if (d.start) return [35, 206, 250];
+      else if (d.end) return [50, 205, 50];
+      else return [220, 20, 60];
+    },
+    getLineColor: (d) => [255, 255, 255],
     onHover: ({ object, x, y }) => {
-      const tooltip = `${object.name}\n${object.address}`;
+      //const tooltip = `${object.name}\n${object.address}`;
       /* Update tooltip
          http://deck.gl/#/documentation/developer-guide/adding-interactivity?section=example-display-a-tooltip-for-hovered-object
       */
