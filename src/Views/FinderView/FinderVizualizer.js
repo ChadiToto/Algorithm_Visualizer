@@ -51,13 +51,22 @@ const FinderVizualizer = () => {
   });
 
   useEffect(() => {
+    /* Points Initialization */
+    modifyPointLayer(points);
+  }, []);
+
+  /**
+   * This function modifies the point Layer State
+   * @param {*} data - new data to be set on to the layer
+   */
+  function modifyPointLayer(data) {
     /**
      * This Layer is Responsible for setting points throughout the map
      */
     setPointLayer(
       new ScatterplotLayer({
         id: "scatterplot-layer",
-        data: points,
+        data,
         pickable: true,
         opacity: 0.8,
         filled: true,
@@ -70,13 +79,13 @@ const FinderVizualizer = () => {
         getFillColor: (d) => {
           if (d.start) return [35, 206, 250];
           else if (d.end) return [50, 205, 50];
-          else if (d.visited) return [100, 100, 100];
+          else if (d.visited) return [147, 112, 219];
           else return [220, 20, 60];
         },
         getLineColor: (d) => [255, 255, 255],
       })
     );
-  }, []);
+  }
 
   /**
    * This layer displays a line that connects cities within the map
@@ -110,28 +119,7 @@ const FinderVizualizer = () => {
             points[j].start = false;
             points[j].end = false;
             const new_points = [...points];
-            setPointLayer(
-              new ScatterplotLayer({
-                id: "scatterplot-layer",
-                data: new_points,
-                pickable: true,
-                opacity: 0.8,
-                filled: true,
-                radiusScale: 10,
-                radiusMinPixels: 5,
-                radiusMaxPixels: 100,
-                lineWidthMinPixels: 1,
-                getPosition: (d) => d.coordinates,
-                getRadius: (d) => Math.sqrt(d.exits),
-                getFillColor: (d) => {
-                  if (d.start) return [35, 206, 250];
-                  else if (d.end) return [50, 205, 50];
-                  else if (d.visited) return [138, 43, 226];
-                  else return [220, 20, 60];
-                },
-                getLineColor: (d) => [255, 255, 255],
-              })
-            );
+            modifyPointLayer(new_points);
           }, j * 500);
           break;
         }
@@ -147,20 +135,15 @@ const FinderVizualizer = () => {
    */
   const setTraversal = (algorithm) => {
     switch (algorithm) {
-      case 0: // Selection Sort
-        //setAnimations(selectionSort);
+      case 0:
         break;
-      case 1: // Bubble Sort
-        //setAnimations(bubbleSort);
+      case 1:
         break;
-      case 2: // Insertion Sort
-        //setAnimations(insertionSort);
+      case 2:
         break;
       case 3:
-        //setAnimations(quickSort);
         break;
       case 4:
-        //setAnimations(mergeSort);
         break;
       case 5:
         setAnimations(graph.BFS("Paris"));
