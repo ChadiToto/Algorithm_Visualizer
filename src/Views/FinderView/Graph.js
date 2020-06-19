@@ -47,6 +47,26 @@ class Graph {
     let edge = new Edge(src, dest, weight);
     this.adjacencylist[src].unshift(edge);
   }
+
+  BFS(src, dest) {
+    let visited = [];
+    let queue = [];
+    let path = [];
+    visited[src] = true;
+    queue.push(src);
+    while (queue.length !== 0) {
+      src = queue.shift();
+      path.push(src);
+      for (let next of this.adjacencylist[src]) {
+        let n = next.dest;
+        if (!visited[n]) {
+          visited[n] = true;
+          queue.push(n);
+        }
+      }
+    }
+    return path;
+  }
 }
 
 /**
@@ -75,6 +95,9 @@ function getDistance(coord_city1, coord_city2) {
   return R * c * 0.001; // in km
 }
 
+/**
+ * This function initalizes the graph we're going to work with
+ */
 function initGraph() {
   const list = [];
   for (let vertices of data) {
@@ -165,5 +188,6 @@ function initGraph() {
 }
 
 const graph = initGraph();
+//console.log(graph.BFS("Paris", "Toulon"));
 
 export default graph;

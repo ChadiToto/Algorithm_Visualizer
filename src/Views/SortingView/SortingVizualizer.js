@@ -29,6 +29,7 @@ const useStyles = makeStyles({
 });
 
 const SortingVizualizer = () => {
+  const classes = useStyles();
   const [array, setArray] = useState([]);
   const [oldArray, setOldArray] = useState([]);
 
@@ -123,7 +124,6 @@ const SortingVizualizer = () => {
    * animation depending on the input of "algortihm".
    *
    * @param {number} algortihm The Algorithm to be animated
-   * @todo Add mergeSort
    */
   const setSortingAlgo = (algortihm) => {
     switch (algortihm) {
@@ -146,8 +146,6 @@ const SortingVizualizer = () => {
         console.error("Invalid Algorithm");
     }
   };
-
-  const classes = useStyles();
 
   /**
    * Associate Every Algorithm with the setSorting function with

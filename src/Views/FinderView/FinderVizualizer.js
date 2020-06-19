@@ -1,6 +1,6 @@
 /* React Main Features */
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 /* 3rd Party Components */
@@ -30,8 +30,6 @@ const useStyles = makeStyles({
   },
 });
 
-/* TESTING PURPOSES */
-
 /* Intialization Position */
 const initialViewState = {
   longitude: 2.2935,
@@ -43,34 +41,46 @@ const initialViewState = {
 
 const FinderVizualizer = () => {
   const classes = useStyles();
-
-  const point_layer = new ScatterplotLayer({
-    id: "scatterplot-layer",
-    data: points,
-    pickable: true,
-    opacity: 0.8,
-    stroked: true,
-    filled: true,
-    radiusScale: 10,
-    radiusMinPixels: 5,
-    radiusMaxPixels: 100,
-    lineWidthMinPixels: 1,
-    getPosition: (d) => d.coordinates,
-    getRadius: (d) => Math.sqrt(d.exits),
-    getFillColor: (d) => {
-      if (d.start) return [35, 206, 250];
-      else if (d.end) return [50, 205, 50];
-      else return [220, 20, 60];
-    },
-    getLineColor: (d) => [255, 255, 255],
-    onHover: ({ object, x, y }) => {
-      //const tooltip = `${object.name}\n${object.address}`;
-      /* Update tooltip
-         http://deck.gl/#/documentation/developer-guide/adding-interactivity?section=example-display-a-tooltip-for-hovered-object
-      */
-    },
+  const [pointLayer, setPointLayer] = useState();
+  const [viewport, setViewPort] = useState({
+    width: "100%",
+    height: "100%",
+    latitude: 0,
+    longitude: 0,
+    zoom: 2,
   });
 
+  useEffect(() => {
+    /**
+     * This Layer is Responsible for setting points throughout the map
+     */
+    setPointLayer(
+      new ScatterplotLayer({
+        id: "scatterplot-layer",
+        data: points,
+        pickable: true,
+        opacity: 0.8,
+        filled: true,
+        radiusScale: 10,
+        radiusMinPixels: 5,
+        radiusMaxPixels: 100,
+        lineWidthMinPixels: 1,
+        getPosition: (d) => d.coordinates,
+        getRadius: (d) => Math.sqrt(d.exits),
+        getFillColor: (d) => {
+          if (d.start) return [35, 206, 250];
+          else if (d.end) return [50, 205, 50];
+          else if (d.visited) return [100, 100, 100];
+          else return [220, 20, 60];
+        },
+        getLineColor: (d) => [255, 255, 255],
+      })
+    );
+  }, []);
+
+  /**
+   * This layer displays a line that connects cities within the map
+   */
   const line_layer = new LineLayer({
     id: "line-layer",
     data: paths,
@@ -79,20 +89,6 @@ const FinderVizualizer = () => {
     getSourcePosition: (d) => d.from.coordinates,
     getTargetPosition: (d) => d.to.coordinates,
     getColor: (d) => [105, 105, 105],
-    onHover: ({ object, x, y }) => {
-      //const tooltip = `${object.from.name} to ${object.to.name}`;
-      /* Update tooltip
-         http://deck.gl/#/documentation/developer-guide/adding-interactivity?section=example-display-a-tooltip-for-hovered-object
-      */
-    },
-  });
-
-  const [viewport, setViewPort] = useState({
-    width: "100%",
-    height: "100%",
-    latitude: 0,
-    longitude: 0,
-    zoom: 2,
   });
 
   /**
@@ -103,10 +99,83 @@ const FinderVizualizer = () => {
   const _onViewportChange = (viewport) => setViewPort({ ...viewport });
 
   /**
+   * Displays the traversal Animation within the visualizer
+   */
+  const setAnimations = (path) => {
+    for (let i = 0; i < path.length; i++) {
+      for (let j = 0; j < points.length; j++) {
+        if (points[j].name === path[i]) {
+          setTimeout(() => {
+            points[j].visited = true;
+            points[j].start = false;
+            points[j].end = false;
+            const new_points = [...points];
+            setPointLayer(
+              new ScatterplotLayer({
+                id: "scatterplot-layer",
+                data: new_points,
+                pickable: true,
+                opacity: 0.8,
+                filled: true,
+                radiusScale: 10,
+                radiusMinPixels: 5,
+                radiusMaxPixels: 100,
+                lineWidthMinPixels: 1,
+                getPosition: (d) => d.coordinates,
+                getRadius: (d) => Math.sqrt(d.exits),
+                getFillColor: (d) => {
+                  if (d.start) return [35, 206, 250];
+                  else if (d.end) return [50, 205, 50];
+                  else if (d.visited) return [138, 43, 226];
+                  else return [220, 20, 60];
+                },
+                getLineColor: (d) => [255, 255, 255],
+              })
+            );
+          }, j * 500);
+          break;
+        }
+      }
+    }
+  };
+
+  /**
+   * Calls the setAnimations function to start the traversal
+   * animation depending on the input of "algortihm".
+   *
+   * @param {number} algortihm The Algorithm to be animated
+   */
+  const setTraversal = (algorithm) => {
+    switch (algorithm) {
+      case 0: // Selection Sort
+        //setAnimations(selectionSort);
+        break;
+      case 1: // Bubble Sort
+        //setAnimations(bubbleSort);
+        break;
+      case 2: // Insertion Sort
+        //setAnimations(insertionSort);
+        break;
+      case 3:
+        //setAnimations(quickSort);
+        break;
+      case 4:
+        //setAnimations(mergeSort);
+        break;
+      case 5:
+        setAnimations(graph.BFS("Paris"));
+        break;
+      default:
+        console.error("Invalid Algorithm");
+    }
+  };
+
+  /**
    * Associate Every Algorithm to its respective function
    * This is passed to child components as props
    *
    * @type {array} of objects
+   * @todo DFS , A* , BF ,DJIKSTRA
    */
   const pathMethods = [
     {
@@ -122,16 +191,14 @@ const FinderVizualizer = () => {
       method: () => {},
     },
     {
-      title: "Floyd–Warshall",
+      title: "DFS",
       method: () => {},
     },
     {
-      title: "Longest Path",
-      method: () => {},
+      title: "BFS",
+      method: () => setTraversal(5),
     },
   ];
-
-  console.log(graph);
 
   return (
     <Grid item direction="column" container style={{ padding: 0 }}>
@@ -142,7 +209,7 @@ const FinderVizualizer = () => {
             initialViewState={initialViewState}
             controller={true}
             style={{ position: "relative", height: 505 }}
-            layers={[point_layer, line_layer]}
+            layers={[pointLayer, line_layer]}
           >
             <MapGL
               {...viewport}
