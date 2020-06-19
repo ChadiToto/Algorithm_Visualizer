@@ -48,6 +48,11 @@ class Graph {
     this.adjacencylist[src].unshift(edge);
   }
 
+  /**
+   * Applies Breadth First Search to The Graph
+   * @param {*} src - starting node
+   * @param {*} dest - goal node
+   */
   BFS(src, dest) {
     let visited = [];
     let queue = [];
@@ -65,6 +70,31 @@ class Graph {
         }
       }
     }
+    return path;
+  }
+
+  /**
+   * Applies Depth First Search on the Graph
+   * @param {*} src - starting node
+   * @param {*} dest - goal node
+   */
+  DFS(src, dest) {
+    let visited = [];
+    let stack = [];
+    let path = [];
+    stack.push(src);
+    while (stack.length !== 0) {
+      src = stack.pop();
+      path.push(src);
+      if (src === dest) break;
+      if (!visited[src]) visited[src] = true;
+
+      for (let city of this.adjacencylist[src]) {
+        let v = city.dest;
+        if (!visited[v]) stack.push(v);
+      }
+    }
+
     return path;
   }
 }
@@ -109,16 +139,16 @@ function initGraph() {
   graph.addEdge(
     "Paris",
     coordinates.Paris,
-    "Dijon",
-    coordinates.Dijon,
-    getDistance(coordinates.Paris, coordinates.Dijon)
+    "Tours",
+    coordinates.Tours,
+    getDistance(coordinates.Paris, coordinates.Tours)
   );
   graph.addEdge(
     "Paris",
     coordinates.Paris,
-    "Tours",
-    coordinates.Tours,
-    getDistance(coordinates.Paris, coordinates.Tours)
+    "Dijon",
+    coordinates.Dijon,
+    getDistance(coordinates.Paris, coordinates.Dijon)
   );
   graph.addEdge(
     "Dijon",

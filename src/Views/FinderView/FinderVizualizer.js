@@ -52,7 +52,7 @@ const FinderVizualizer = () => {
 
   useEffect(() => {
     /* Points Initialization */
-    modifyPointLayer(points);
+    modifyPointLayer([...points]);
   }, []);
 
   /**
@@ -88,24 +88,20 @@ const FinderVizualizer = () => {
   }
 
   /**
-   * This layer displays a line that connects cities within the map
-   */
-  const line_layer = new LineLayer({
-    id: "line-layer",
-    data: paths,
-    pickable: true,
-    getWidth: 0.5,
-    getSourcePosition: (d) => d.from.coordinates,
-    getTargetPosition: (d) => d.to.coordinates,
-    getColor: (d) => [105, 105, 105],
-  });
-
-  /**
    * Changes view port when moving/zooming Map
    *
    * @param {*} viewport
    */
   const _onViewportChange = (viewport) => setViewPort({ ...viewport });
+
+  const resetPath = () => {
+    points[0].start = true;
+    points[points.length - 1].end = true;
+    for (let point of points) {
+      point.visited = false;
+    }
+    modifyPointLayer(points);
+  };
 
   /**
    * Displays the traversal Animation within the visualizer
@@ -115,10 +111,10 @@ const FinderVizualizer = () => {
       for (let j = 0; j < points.length; j++) {
         if (points[j].name === path[i]) {
           setTimeout(() => {
-            points[j].visited = true;
-            points[j].start = false;
-            points[j].end = false;
             const new_points = [...points];
+            new_points[j].visited = true;
+            new_points[j].start = false;
+            new_points[j].end = false;
             modifyPointLayer(new_points);
           }, j * 500);
           break;
@@ -132,6 +128,8 @@ const FinderVizualizer = () => {
    * animation depending on the input of "algortihm".
    *
    * @param {number} algortihm The Algorithm to be animated
+   * @todo  A* , BF ,DJIKSTRA
+
    */
   const setTraversal = (algorithm) => {
     switch (algorithm) {
@@ -144,6 +142,7 @@ const FinderVizualizer = () => {
       case 3:
         break;
       case 4:
+        setAnimations(graph.DFS("Paris", "Toulon"));
         break;
       case 5:
         setAnimations(graph.BFS("Paris"));
@@ -158,7 +157,6 @@ const FinderVizualizer = () => {
    * This is passed to child components as props
    *
    * @type {array} of objects
-   * @todo DFS , A* , BF ,DJIKSTRA
    */
   const pathMethods = [
     {
@@ -175,13 +173,28 @@ const FinderVizualizer = () => {
     },
     {
       title: "DFS",
-      method: () => {},
+      method: () => {
+        setTraversal(4);
+      },
     },
     {
       title: "BFS",
       method: () => setTraversal(5),
     },
   ];
+
+  /**
+   * This layer displays a line that connects cities within the map
+   */
+  const line_layer = new LineLayer({
+    id: "line-layer",
+    data: paths,
+    pickable: true,
+    getWidth: 0.5,
+    getSourcePosition: (d) => d.from.coordinates,
+    getTargetPosition: (d) => d.to.coordinates,
+    getColor: (d) => [105, 105, 105],
+  });
 
   return (
     <Grid item direction="column" container style={{ padding: 0 }}>
@@ -203,7 +216,12 @@ const FinderVizualizer = () => {
           </DeckGL>
         </Grid>
       </Grid>
-      <Player options={pathMethods} className={classes.player}></Player>
+      <Player
+        options={pathMethods}
+        reset={resetPath}
+        className={classes.player}
+        undo={resetPath}
+      ></Player>
     </Grid>
   );
 };
