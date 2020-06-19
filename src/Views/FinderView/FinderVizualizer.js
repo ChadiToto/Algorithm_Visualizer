@@ -12,10 +12,14 @@ import DeckGL from "@deck.gl/react";
 
 /* Custom Components */
 import Player from "../../Components/Player";
-import { ScatterplotLayer } from "@deck.gl/layers";
+import { ScatterplotLayer, LineLayer } from "@deck.gl/layers";
 
-/* Map Marker data */
-import data from "./data";
+/* Layer data  */
+import points from "./data/point_data";
+import paths from "./data/path";
+
+/* Graph DS */
+import graph from "./Graph";
 
 /* MapBox Token */
 const TOKEN = process.env.REACT_APP_TOKEN;
@@ -39,9 +43,10 @@ const initialViewState = {
 
 const FinderVizualizer = () => {
   const classes = useStyles();
-  const layer = new ScatterplotLayer({
+
+  const point_layer = new ScatterplotLayer({
     id: "scatterplot-layer",
-    data,
+    data: points,
     pickable: true,
     opacity: 0.8,
     stroked: true,
@@ -60,6 +65,22 @@ const FinderVizualizer = () => {
     getLineColor: (d) => [255, 255, 255],
     onHover: ({ object, x, y }) => {
       //const tooltip = `${object.name}\n${object.address}`;
+      /* Update tooltip
+         http://deck.gl/#/documentation/developer-guide/adding-interactivity?section=example-display-a-tooltip-for-hovered-object
+      */
+    },
+  });
+
+  const line_layer = new LineLayer({
+    id: "line-layer",
+    data: paths,
+    pickable: true,
+    getWidth: 0.5,
+    getSourcePosition: (d) => d.from.coordinates,
+    getTargetPosition: (d) => d.to.coordinates,
+    getColor: (d) => [105, 105, 105],
+    onHover: ({ object, x, y }) => {
+      //const tooltip = `${object.from.name} to ${object.to.name}`;
       /* Update tooltip
          http://deck.gl/#/documentation/developer-guide/adding-interactivity?section=example-display-a-tooltip-for-hovered-object
       */
@@ -110,6 +131,8 @@ const FinderVizualizer = () => {
     },
   ];
 
+  console.log(graph);
+
   return (
     <Grid item direction="column" container style={{ padding: 0 }}>
       {/* Vizualizer Part */}
@@ -119,7 +142,7 @@ const FinderVizualizer = () => {
             initialViewState={initialViewState}
             controller={true}
             style={{ position: "relative", height: 505 }}
-            layers={layer}
+            layers={[point_layer, line_layer]}
           >
             <MapGL
               {...viewport}
