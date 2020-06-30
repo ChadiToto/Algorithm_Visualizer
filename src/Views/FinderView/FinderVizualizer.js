@@ -19,7 +19,7 @@ import points from "./data/point_data";
 import paths from "./data/path";
 
 /* Graph DS */
-import graph from "./Graph";
+import graph from "./WeightedGraph";
 
 /* MapBox Token */
 const TOKEN = process.env.REACT_APP_TOKEN;
@@ -107,6 +107,10 @@ const FinderVizualizer = () => {
    * Displays the traversal Animation within the visualizer
    */
   const setAnimations = (path) => {
+    /**
+     * For each Vertex we visit we change the point data attribute visited to true
+     * in order to mark the "point" in the displayed screen
+     */
     for (let i = 0; i < path.length; i++) {
       for (let j = 0; j < points.length; j++) {
         if (points[j].name === path[i]) {
@@ -116,7 +120,7 @@ const FinderVizualizer = () => {
             new_points[j].start = false;
             new_points[j].end = false;
             modifyPointLayer(new_points);
-          }, j * 500);
+          }, i * 500);
           break;
         }
       }
@@ -134,17 +138,12 @@ const FinderVizualizer = () => {
   const setTraversal = (algorithm) => {
     switch (algorithm) {
       case 0:
+        setAnimations(graph.Dijkstra("Paris", "Toulon"));
         break;
       case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
         setAnimations(graph.DFS("Paris", "Toulon"));
         break;
-      case 5:
+      case 2:
         setAnimations(graph.BFS("Paris"));
         break;
       default:
@@ -160,26 +159,20 @@ const FinderVizualizer = () => {
    */
   const pathMethods = [
     {
-      title: "A*",
-      method: () => {},
-    },
-    {
-      title: "Bellman-Ford",
-      method: () => {},
-    },
-    {
       title: "Dijkstra ",
-      method: () => {},
-    },
-    {
-      title: "DFS",
       method: () => {
-        setTraversal(4);
+        setTraversal(0);
       },
     },
     {
-      title: "BFS",
-      method: () => setTraversal(5),
+      title: "Depth First Search",
+      method: () => {
+        setTraversal(1);
+      },
+    },
+    {
+      title: "Breadth First Search",
+      method: () => setTraversal(2),
     },
   ];
 
