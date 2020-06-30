@@ -21,19 +21,20 @@ let data = [
     ],
   },
   {
-    heading: "Data Structures",
+    heading: "Classic Problems",
     children: [
       {
-        title: "LinkedLists",
-        desc: "Vizualize how linkedlist works by exploring basic operations.",
+        title: "4-Queens Problem",
+        desc:
+          "Vizualize how you can place 4 Queens into a 4x4 chessboard so that they don't attack each other.",
         image:
           "https://static.vecteezy.com/system/resources/thumbnails/000/668/775/small/elegant-valentine-gradient-background.jpg",
         link: "/",
       },
       {
-        title: "Trees",
+        title: "Fifteen Puzzle Game",
         desc:
-          "Vizualize how tree search works by exploring Algorithms such as BFS and DFS... ",
+          "Vizualize how you can beat the fifteen puzzle game using the A* algorithm. ",
         image:
           "https://static.vecteezy.com/system/resources/thumbnails/000/678/532/small/neon-colors-blur-background.jpg",
         link: "/",
