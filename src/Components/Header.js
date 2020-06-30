@@ -1,4 +1,8 @@
+/* React */
 import React from "react";
+import { Link } from "react-router-dom";
+
+/* 3RD Party Components */
 import { AppBar, Typography, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -19,7 +23,9 @@ const Header = () => {
   return (
     <AppBar position="static" color="secondary" className={classes.root}>
       <Toolbar variant="dense">
-        <Typography className={classes.typo}>Algorithm Visualizer</Typography>
+        <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          <Typography className={classes.typo}>Algorithm Visualizer</Typography>
+        </Link>
       </Toolbar>
     </AppBar>
   );

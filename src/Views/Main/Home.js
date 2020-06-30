@@ -1,13 +1,20 @@
+/* React */
 import React from "react";
+import { Link } from "react-router-dom";
+
+/* 3RD Party Components */
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography } from "@material-ui/core";
 
+/* Custom Components */
 import Card from "../../Components/Card";
 
+/* Data */
 import data from "./data";
 
 const useStyles = makeStyles({
   root: {
+    marginTop: "5vh",
     marginLeft: "4.5vw",
   },
   typo: {
@@ -38,7 +45,9 @@ const Home = () => {
                   xs={11}
                   md={Math.floor((12 - 1) / row.children.length)}
                 >
-                  <Card child={child}></Card>
+                  <Link to={child.link} style={{ textDecoration: "none" }}>
+                    <Card child={child}></Card>
+                  </Link>
                 </Grid>
                 <Grid item xs={1}></Grid>
               </>

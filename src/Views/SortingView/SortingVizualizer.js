@@ -211,7 +211,7 @@ const SortingVizualizer = () => {
   };
 
   return (
-    <Grid item direction="column" container style={{ padding: 0 }}>
+    <Grid item direction="column" container style={{ marginTop: "4vh" }}>
       {/* Vizualizer Part */}
       <Grid container>
         <Grid item xs={1}></Grid>
