@@ -10,7 +10,7 @@ import { Grid } from "@material-ui/core";
 
 /* Custom Components*/
 import Header from "../../Components/Header";
-import Home from "../Main/Home";
+import Home from "../HomeView/Home";
 import SortingVizualizer from "../SortingView/SortingVizualizer";
 import FinderVizualizer from "../FinderView/FinderVizualizer";
 
