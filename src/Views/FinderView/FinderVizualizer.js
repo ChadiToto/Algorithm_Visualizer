@@ -132,8 +132,6 @@ const FinderVizualizer = () => {
    * animation depending on the input of "algortihm".
    *
    * @param {number} algortihm The Algorithm to be animated
-   * @todo  A* , BF ,DJIKSTRA
-
    */
   const setTraversal = (algorithm) => {
     switch (algorithm) {

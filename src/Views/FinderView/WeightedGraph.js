@@ -16,7 +16,7 @@ class WeightedGraph {
 
   /**
    * This method adds a vertex to the graph
-   * @param {*} name - is the name of the vertex to be added
+   * @param {string} name - is the name of the vertex to be added
    */
   addVertex(name) {
     if (!this.adjacencyList[name]) {
@@ -27,9 +27,9 @@ class WeightedGraph {
   /**
    * This method adds a edge to the graph
    * An Edge is the relation between two vertices
-   * @param {*} vert1
-   * @param {*} vert2
-   * @param {*} weight
+   * @param {string} vert1
+   * @param {string} vert2
+   * @param {number} weight
    */
   addEdge(vert1, vert2, weight) {
     this.adjacencyList[vert1][vert2] = weight;
@@ -38,8 +38,8 @@ class WeightedGraph {
 
   /**
    * This method removes an edge in the graph
-   * @param {*} v1 - the name of the first vertex
-   * @param {*} v2 - the name of the second vertex
+   * @param {string} v1 - the name of the first vertex
+   * @param {string} v2 - the name of the second vertex
    */
   removeEdge(v1, v2) {
     delete this.adjacencyList[v1][v2];
@@ -48,7 +48,7 @@ class WeightedGraph {
 
   /**
    * This method removes a vertex in the graph
-   * @param {*} vert - the name of the vertex to be removed
+   * @param {string} vert - the name of the vertex to be removed
    */
   removeVertex(vert) {
     for (let i in this.adjacencyList[vert]) {
@@ -59,7 +59,8 @@ class WeightedGraph {
 
   /**
    * Applies Depth-First-Search to the Graph
-   * @param {*} target - is the target vertex we're looking for
+   * @param {string} target - is the target vertex we're looking for
+   * @return {array} The path to be displayed on the visualizer
    */
   DFS(start, target) {
     const result = [];
@@ -81,7 +82,8 @@ class WeightedGraph {
 
   /**
    * Applies Breadth-First Search to the Graph
-   * @param {*} start - is the starting vertex we're going from
+   * @param {string} start - is the starting vertex we're going from
+   * @return {array} - The path to be displayed on the visualizer
    */
   BFS(start) {
     const queue = [start];
@@ -103,8 +105,9 @@ class WeightedGraph {
 
   /**
    * Applies Dijkstra Algorithm to the Graph
-   * @param {*} start - Vertex we're going from
-   * @param {*} finish - Vertex we're going to
+   * @param {string} start - Vertex we're going from
+   * @param {string} finish - Vertex we're going to
+   * @return - The path to be displayed on the visualizer
    */
   Dijkstra(start, finish) {
     const costFromStartTo = {};
@@ -149,8 +152,9 @@ class WeightedGraph {
 /**
  * Get the distance between two cities using lat & long
  * Ressources : https://www.movable-type.co.uk/scripts/latlong.html
- * @param {*} city_1
- * @param {*} city_2
+ * @param {array} city_1 - containing the lat in the 1st position & lon in the 2nd position
+ * @param {array} city_2 - containing the lat in the 1st position & lon in the 2nd position
+ * @return {number} the distance in KM
  */
 function getDistance(coord_city1, coord_city2) {
   const lat1 = coord_city1[1];
@@ -238,8 +242,6 @@ function initGraph() {
     "Marseille",
     getDistance(coordinates.Montpellier, coordinates.Marseille)
   );
-
-  console.log(graph);
 
   return graph;
 }

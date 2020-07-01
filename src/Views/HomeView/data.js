@@ -32,9 +32,9 @@ let data = [
         link: "/",
       },
       {
-        title: "Fifteen Puzzle Game",
+        title: "8-Puzzle Game",
         desc:
-          "Vizualize how you can beat the fifteen puzzle game using the A* algorithm. ",
+          "Vizualize how you can beat the 8-puzzle game using the A* algorithm. ",
         image:
           "https://static.vecteezy.com/system/resources/thumbnails/000/678/532/small/neon-colors-blur-background.jpg",
         link: "/",
