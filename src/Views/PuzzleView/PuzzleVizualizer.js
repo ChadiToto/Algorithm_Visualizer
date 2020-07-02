@@ -44,7 +44,11 @@ const PuzzleVizualizer = () => {
    */
   const resetPuzzle = () => {
     let n = Math.floor(Math.random() * (puzzledata.length - 1));
-    setPuzzle(puzzledata[n]);
+    setPuzzle([]);
+    // Refresh Effect
+    setTimeout(() => {
+      setPuzzle(puzzledata[n]);
+    }, 0.5);
   };
 
   const setBoard = () => {
