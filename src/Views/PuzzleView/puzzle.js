@@ -135,12 +135,12 @@ export default class Puzzle {
    * @todo GENERATE PATH
    */
   Astar() {
+    let count = 0;
     let queue = []; // PRIORITY QUEUE
     queue.push(this);
     while (queue.length !== 0) {
+      count++;
       let current = queue.shift();
-      current.printPuzzle();
-      console.log(" ");
       if (current.getH() !== 0) {
         current.setChildren();
         for (let i = 0; i < current.children.length; i++) {
@@ -148,7 +148,7 @@ export default class Puzzle {
         }
         queue.sort((a, b) => a.F - b.F);
       } else {
-        break;
+        return [current, count];
       }
     }
   }

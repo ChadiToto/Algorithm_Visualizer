@@ -12,6 +12,12 @@ import { generateMatrix, isSolvable } from "./helperFunctions";
 /* Custom Components */
 import Player from "../../Components/Player";
 
+/* Puzzle Class */
+import Puzzle from "./puzzle";
+
+/* Premade Puzzles */
+import puzzledata from "./puzzledata";
+
 const useStyles = makeStyles({
   row: {
     backgroundColor: "#eb0839",
@@ -40,11 +46,8 @@ const PuzzleVizualizer = () => {
    * @note NOT ALL PUZZLES ARE SOLVABLE
    */
   const resetPuzzle = () => {
-    let puzzle_matrix = [];
-    do {
-      puzzle_matrix = generateMatrix();
-    } while (!isSolvable(puzzle_matrix));
-    setPuzzle(puzzle_matrix);
+    let n = Math.floor(Math.random() * (puzzledata.length - 1));
+    setPuzzle(puzzledata[n]);
   };
 
   const setBoard = () => {
@@ -72,15 +75,32 @@ const PuzzleVizualizer = () => {
   /**
    * Reverts back puzzle to initial state
    */
-  const undo = () => {};
+  //const undo = () => {};
 
   /**
    * Displays animation on the Vizualizer
-   *
    */
-  const setAnimations = () => {};
+  const setAnimations = () => {
+    let puzzleInstance = new Puzzle(puzzle, null);
+    let solution = puzzleInstance.Astar()[0];
+    let path = [];
+    while (solution.parent !== null) {
+      path.unshift(solution);
+      solution = solution.parent;
+    }
+    for (let i = 0; i < path.length; i++) {
+      setTimeout(() => {
+        setPuzzle(path[i].val);
+      }, i * 600);
+    }
+  };
 
-  const Astar = [];
+  const algorithm = [
+    {
+      title: "A*",
+      method: () => setAnimations(),
+    },
+  ];
 
   return (
     <Grid item direction="column" container style={{ marginTop: "4vh" }}>
@@ -93,7 +113,7 @@ const PuzzleVizualizer = () => {
       </Grid>
 
       {/* Player Part */}
-      <Player options={Astar} reset={resetPuzzle}></Player>
+      <Player options={algorithm} reset={resetPuzzle}></Player>
     </Grid>
   );
 };
