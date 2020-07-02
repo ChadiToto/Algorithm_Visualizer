@@ -8,7 +8,7 @@ const target = [
 /**
  * @class - Representing the Puzzle
  */
-class Puzzle {
+export default class Puzzle {
   /**
    * @constructor
    * @param {array} val - This the puzzle in the form of a 2D Array
@@ -155,75 +155,10 @@ class Puzzle {
 }
 
 /**
- * This function intialize a solvable Puzzle
- * @returns {array} a 2D array containing the starting puzzle value
- * @note NOT ALL PUZZLES ARE SOLVABLE
- */
-function initializePuzzle() {
-  let puzzle = [];
-  do {
-    puzzle = generateMatrix();
-  } while (!isSolvable(puzzle));
-
-  return puzzle;
-}
-
-/**
  * This function clones a 2D array
  * @note We can not use the spread operator for 2D arrays as it only copy the first level
  * @param {array} a - The cloned 2D array
  */
 function clone2D(a) {
   return a.map((o) => [...o]);
-}
-
-/**
- * This function returns a random 2D array filled with unique values from 0-8
- * @returns {array} Generated Puzzle
- * @note The LAST element will always be a "0"
- */
-function generateMatrix() {
-  let puzzle = [];
-  let nums = [1, 2, 3, 4, 5, 6, 7, 8];
-
-  let k = 8;
-
-  for (let i = 0; i < 3; i++) {
-    for (let j = 0; j < 3; j++) {
-      if (i === j && i === 2) puzzle[i][j] = 0;
-      let n = Math.floor(Math.random() * (k + 1));
-      puzzle[i][j] = nums[n];
-      nums.splice(n, 1);
-      k--;
-    }
-  }
-  return puzzle;
-}
-
-/**
- * This function returns the inversion count of the puzzle
- * @ressource https://datawookie.netlify.app/blog/2019/04/sliding-puzzle-solvable/
- * @param {array} puzzle
- * @returns {number} inversion count
- */
-function getInvCount(puzzle) {
-  let puzzle1D = [].concat(...puzzle);
-  let inv_count = 0;
-  for (let i = 0; i < 8; i++) {
-    for (let j = i + 1; j < 9; j++) {
-      if (puzzle1D[i] > puzzle1D[j]) inv_count++;
-    }
-  }
-  return inv_count;
-}
-
-/**
- * This function returns the solvability of the puzzle
- * @ressource https://datawookie.netlify.app/blog/2019/04/sliding-puzzle-solvable/
- * @param {array} puzzle
- * @returns {boolean} if the puzzle is solvable or not
- */
-function isSolvable(puzzle) {
-  let invCount = this.getInvCount(puzzle);
-  return invCount % 2 === 0;
 }

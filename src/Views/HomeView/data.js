@@ -37,7 +37,7 @@ let data = [
           "Vizualize how you can beat the 8-puzzle game using the A* algorithm. ",
         image:
           "https://static.vecteezy.com/system/resources/thumbnails/000/678/532/small/neon-colors-blur-background.jpg",
-        link: "/",
+        link: "/Puzzle",
       },
     ],
   },
