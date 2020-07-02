@@ -50,12 +50,18 @@ const PuzzleVizualizer = () => {
   const setBoard = () => {
     return (
       <Grid container direction="column">
-        {puzzle.map((row, index) => {
+        {puzzle.map((row, i) => {
           return (
-            <Grid container key={"row-" + index}>
-              {row.map((n) => {
+            <Grid container key={"row-" + i}>
+              {row.map((n, j) => {
                 return (
-                  <Grid item xs={3} className={classes.row} key={n}>
+                  <Grid
+                    item
+                    xs={3}
+                    className={classes.row}
+                    key={"col-" + j}
+                    id={i + "" + j}
+                  >
                     <Typography align="center" className={classes.number}>
                       {n}
                     </Typography>
@@ -80,15 +86,35 @@ const PuzzleVizualizer = () => {
   const setAnimations = () => {
     let puzzleInstance = new Puzzle(puzzle, null);
     let solution = puzzleInstance.Astar()[0];
-    let path = [];
+    let animations = [];
     while (solution.parent !== null) {
-      path.unshift(solution);
+      animations.unshift(solution.getZeroPos());
       solution = solution.parent;
     }
-    for (let i = 0; i < path.length; i++) {
-      setTimeout(() => {
-        setPuzzle(path[i].val);
-      }, i * 600);
+
+    let k = 0;
+    while (animations.length !== 1) {
+      let tileOneKey = animations[0].join("");
+      let tileTwoKey = animations[1].join("");
+
+      let tileOne = document.getElementById(tileOneKey);
+      let tileTwo = document.getElementById(tileTwoKey);
+
+      for (let i = 0; i < 2; i++) {
+        const color = i === 0 ? "red" : "#eb0839";
+        setTimeout(() => {
+          tileOne.style.backgroundColor = color;
+          tileTwo.style.backgroundColor = color;
+          if (i !== 0) {
+            [tileOne.innerHTML, tileTwo.innerHTML] = [
+              tileTwo.innerHTML,
+              tileOne.innerHTML,
+            ];
+          }
+        }, k * 300);
+        k++;
+      }
+      animations.shift();
     }
   };
 
