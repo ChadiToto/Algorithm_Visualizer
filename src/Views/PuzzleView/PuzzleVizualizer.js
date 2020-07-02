@@ -6,9 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 /* 3rd Party Components */
 import { Grid, Typography } from "@material-ui/core";
 
-/* Helper Functions */
-import { generateMatrix, isSolvable } from "./helperFunctions";
-
 /* Custom Components */
 import Player from "../../Components/Player";
 
@@ -53,12 +50,12 @@ const PuzzleVizualizer = () => {
   const setBoard = () => {
     return (
       <Grid container direction="column">
-        {puzzle.map((row) => {
+        {puzzle.map((row, index) => {
           return (
-            <Grid container>
+            <Grid container key={"row-" + index}>
               {row.map((n) => {
                 return (
-                  <Grid item xs={3} className={classes.row}>
+                  <Grid item xs={3} className={classes.row} key={n}>
                     <Typography align="center" className={classes.number}>
                       {n}
                     </Typography>
@@ -105,7 +102,7 @@ const PuzzleVizualizer = () => {
   return (
     <Grid item direction="column" container style={{ marginTop: "4vh" }}>
       {/* Vizualizer Part */}
-      <Grid container xs={12} style={{ marginBottom: 58, marginTop: 20 }}>
+      <Grid container style={{ marginBottom: 58, marginTop: 20 }}>
         <Grid item xs={2} sm={4} />
         <Grid item sm={5} xs={10} style={{}}>
           {setBoard()}
