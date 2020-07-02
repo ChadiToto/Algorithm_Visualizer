@@ -87,7 +87,7 @@ const PuzzleVizualizer = () => {
     let puzzleInstance = new Puzzle(puzzle, null);
     let solution = puzzleInstance.Astar()[0];
     let animations = [];
-    while (solution.parent !== null) {
+    while (solution !== null) {
       animations.unshift(solution.getZeroPos());
       solution = solution.parent;
     }
