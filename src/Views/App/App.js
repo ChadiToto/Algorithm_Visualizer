@@ -18,7 +18,7 @@ import PuzzleVizualizer from "../PuzzleView/PuzzleVizualizer";
 function App() {
   return (
     <Router>
-      <Grid container direction="column" spacing={0}>
+      <Grid container direction="column">
         <Grid item xs={12}>
           <Header></Header>
         </Grid>

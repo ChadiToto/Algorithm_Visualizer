@@ -11,9 +11,13 @@ export function generateMatrix() {
   let k = 8;
 
   for (let i = 0; i < 3; i++) {
+    puzzle.push([]);
     for (let j = 0; j < 3; j++) {
-      if (i === j && i === 2) puzzle[i][j] = 0;
-      let n = Math.floor(Math.random() * (k + 1));
+      if (j === 2 && i === 2) {
+        puzzle[i][j] = 0;
+        break;
+      }
+      let n = Math.floor(Math.random() * (k - 1));
       puzzle[i][j] = nums[n];
       nums.splice(n, 1);
       k--;

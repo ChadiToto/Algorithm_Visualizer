@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 /* 3rd Party Components */
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 
 /* Helper Functions */
 import { generateMatrix, isSolvable } from "./helperFunctions";
@@ -13,11 +13,16 @@ import { generateMatrix, isSolvable } from "./helperFunctions";
 import Player from "../../Components/Player";
 
 const useStyles = makeStyles({
-  container: {
-    backgroundColor: "#EDEFED",
-    width: "100%",
-    minHeight: 450,
-    marginBottom: 30,
+  row: {
+    backgroundColor: "#eb0839",
+    paddingTop: 40,
+    paddingBottom: 40,
+    marginRight: "2px",
+    marginTop: "2px",
+  },
+  number: {
+    color: "white",
+    fontSize: "35px",
   },
 });
 
@@ -25,7 +30,9 @@ const PuzzleVizualizer = () => {
   const classes = useStyles();
   const [puzzle, setPuzzle] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    resetPuzzle();
+  }, []);
 
   /**
    * This function intialize a solvable Puzzle
@@ -38,6 +45,28 @@ const PuzzleVizualizer = () => {
       puzzle_matrix = generateMatrix();
     } while (!isSolvable(puzzle_matrix));
     setPuzzle(puzzle_matrix);
+  };
+
+  const setBoard = () => {
+    return (
+      <Grid container direction="column">
+        {puzzle.map((row) => {
+          return (
+            <Grid container>
+              {row.map((n) => {
+                return (
+                  <Grid item xs={3} className={classes.row}>
+                    <Typography align="center" className={classes.number}>
+                      {n}
+                    </Typography>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          );
+        })}
+      </Grid>
+    );
   };
 
   /**
@@ -56,15 +85,15 @@ const PuzzleVizualizer = () => {
   return (
     <Grid item direction="column" container style={{ marginTop: "4vh" }}>
       {/* Vizualizer Part */}
-      <Grid container>
-        <Grid item xs={1}></Grid>
-        <Grid item xs={10}>
-          <Paper className={classes.container}></Paper>
+      <Grid container xs={12} style={{ marginBottom: 58, marginTop: 20 }}>
+        <Grid item xs={2} sm={4} />
+        <Grid item sm={5} xs={10} style={{}}>
+          {setBoard()}
         </Grid>
       </Grid>
 
       {/* Player Part */}
-      <Player options={Astar}></Player>
+      <Player options={Astar} reset={resetPuzzle}></Player>
     </Grid>
   );
 };
