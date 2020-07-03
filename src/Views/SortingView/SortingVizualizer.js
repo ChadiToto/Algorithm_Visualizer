@@ -116,7 +116,8 @@ const SortingVizualizer = () => {
    * @returns {number} time in ms
    */
   const getTime = (fct) => {
-    return fct(oldArray).time;
+    let time = fct(oldArray).time;
+    if (time) return time.toFixed(2) + " ms";
   };
 
   /**

@@ -66,7 +66,7 @@ const Player = (props) => {
         {props.time.algorithms.map((algo) => {
           return (
             <div className={classes.timerElements}>
-              {algo.title} : {algo.time.toFixed(2)} ms
+              {algo.title} : {algo.time}
             </div>
           );
         })}

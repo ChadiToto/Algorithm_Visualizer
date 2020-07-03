@@ -51,6 +51,9 @@ const PuzzleVizualizer = () => {
     }, 0.5);
   };
 
+  /**
+   * This function displays a board on the visualizer
+   */
   const setBoard = () => {
     return (
       <Grid container direction="column">
@@ -122,12 +125,34 @@ const PuzzleVizualizer = () => {
     }
   };
 
+  /**
+   * This functions returns the number of iterations of A*
+   * Required in order to find a solution
+   */
+  const getIterations = () => {
+    return puzzle.Astar().count;
+  };
+
+  /**
+   * This function is responsible for triggering Animations
+   * it is passed as props into the player component
+   */
   const algorithm = [
     {
       title: "A*",
       method: () => setAnimations(),
     },
   ];
+
+  const iterations = {
+    title: "Finding an optimal Solution took : ",
+    algorithms: [
+      {
+        title: "A*",
+        time: () => getIterations(),
+      },
+    ],
+  };
 
   return (
     <Grid item direction="column" container style={{ marginTop: "4vh" }}>
@@ -140,7 +165,11 @@ const PuzzleVizualizer = () => {
       </Grid>
 
       {/* Player Part */}
-      <Player options={algorithm} reset={resetPuzzle}></Player>
+      <Player
+        options={algorithm}
+        reset={resetPuzzle}
+        time={iterations}
+      ></Player>
     </Grid>
   );
 };
