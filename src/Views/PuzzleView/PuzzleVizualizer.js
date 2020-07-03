@@ -130,7 +130,8 @@ const PuzzleVizualizer = () => {
    * Required in order to find a solution
    */
   const getIterations = () => {
-    return puzzle.Astar().count;
+    let puzzleInstance = new Puzzle(puzzle, null);
+    return puzzleInstance.Astar()[1] + " Iterations";
   };
 
   /**
@@ -149,7 +150,7 @@ const PuzzleVizualizer = () => {
     algorithms: [
       {
         title: "A*",
-        time: () => getIterations(),
+        time: getIterations(),
       },
     ],
   };
