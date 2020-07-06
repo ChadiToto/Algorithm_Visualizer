@@ -14,6 +14,7 @@ import Home from "../HomeView/Home";
 import SortingVizualizer from "../SortingView/SortingVizualizer";
 import FinderVizualizer from "../FinderView/FinderVizualizer";
 import PuzzleVizualizer from "../PuzzleView/PuzzleVizualizer";
+import QueenVizualizer from "../QueenView/QueenVizualizer";
 
 function App() {
   return (
@@ -45,6 +46,9 @@ function App() {
             </Route>
             <Route exact path="/Puzzle">
               <PuzzleVizualizer />
+            </Route>
+            <Route exact path="/Queen">
+              <QueenVizualizer />
             </Route>
           </Switch>
         </div>

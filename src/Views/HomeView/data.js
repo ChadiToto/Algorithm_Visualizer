@@ -29,7 +29,7 @@ let data = [
           "Vizualize how you can place 4 Queens into a 4x4 chessboard so that they don't attack each other.",
         image:
           "https://static.vecteezy.com/system/resources/thumbnails/000/668/775/small/elegant-valentine-gradient-background.jpg",
-        link: "/",
+        link: "/Queen",
       },
       {
         title: "8-Puzzle Game",
