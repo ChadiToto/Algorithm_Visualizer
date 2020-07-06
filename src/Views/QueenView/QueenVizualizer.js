@@ -4,12 +4,23 @@ import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 /* 3rd Party Components */
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, Paper } from "@material-ui/core";
 
 /* Custom Components */
 import Player from "../../Components/Player";
 
-const useStyles = makeStyles({});
+const useStyles = makeStyles({
+  tile: {
+    paddingTop: 60,
+    paddingBottom: 60,
+  },
+  impair: {
+    backgroundColor: "black",
+  },
+  pair: {
+    backgroundColor: "white",
+  },
+});
 
 const QueenVizualizer = () => {
   const classes = useStyles();
@@ -25,7 +36,29 @@ const QueenVizualizer = () => {
    * This function displays a board on the visualizer
    */
   const setBoard = () => {
-    return <div></div>;
+    return (
+      <Grid container direction="column">
+        {[...Array(4)].map((x, i) => {
+          return (
+            <Grid container>
+              {[...Array(4)].map((y, j) => {
+                return (
+                  <Grid
+                    item
+                    xs={3}
+                    className={`${
+                      (j + i) % 2 == 0 ? classes.pair : classes.impair
+                    } ${classes.tile}`}
+                  >
+                    <Typography align="center"></Typography>
+                  </Grid>
+                );
+              })}
+            </Grid>
+          );
+        })}
+      </Grid>
+    );
   };
 
   /**
@@ -45,7 +78,7 @@ const QueenVizualizer = () => {
   const getIterations = () => {};
 
   /**
-   * This function is responsible for triggering Animations
+   * This array is responsible for triggering Animations
    * it is passed as props into the player component
    */
   const algorithm = [];
@@ -55,9 +88,11 @@ const QueenVizualizer = () => {
   return (
     <Grid item direction="column" container style={{ marginTop: "4vh" }}>
       {/* Vizualizer Part */}
-      <Grid container style={{ marginBottom: 58, marginTop: 20 }}>
+      <Grid container style={{ marginBottom: 40, marginTop: 20 }}>
         <Grid item xs={2} sm={4} />
-        <Grid item sm={5} xs={10}></Grid>
+        <Grid item xs={10} sm={4} style={{ marginRight: 60 }}>
+          <Paper>{setBoard()}</Paper>
+        </Grid>
       </Grid>
 
       {/* Player Part */}
