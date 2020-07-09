@@ -47,7 +47,7 @@ const QueenVizualizer = () => {
                     item
                     xs={3}
                     className={`${
-                      (j + i) % 2 == 0 ? classes.pair : classes.impair
+                      (j + i) % 2 === 0 ? classes.pair : classes.impair
                     } ${classes.tile}`}
                   >
                     <Typography align="center"></Typography>
@@ -81,7 +81,12 @@ const QueenVizualizer = () => {
    * This array is responsible for triggering Animations
    * it is passed as props into the player component
    */
-  const algorithm = [];
+  const algorithms = [
+    {
+      title: "BackTracking",
+      method: () => {},
+    },
+  ];
 
   const iterations = {};
 
@@ -96,7 +101,7 @@ const QueenVizualizer = () => {
       </Grid>
 
       {/* Player Part */}
-      <Player options={algorithm}></Player>
+      <Player options={algorithms}></Player>
     </Grid>
   );
 };
