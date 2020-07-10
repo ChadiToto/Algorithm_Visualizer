@@ -9,6 +9,9 @@ import { Grid, Typography, Paper } from "@material-ui/core";
 /* Custom Components */
 import Player from "../../Components/Player";
 
+/* BackTracking */
+import SolveNQ from "./Backtracking";
+
 const useStyles = makeStyles({
   tile: {
     paddingTop: 60,
@@ -50,7 +53,14 @@ const QueenVizualizer = () => {
                       (j + i) % 2 === 0 ? classes.pair : classes.impair
                     } ${classes.tile}`}
                   >
-                    <Typography align="center"></Typography>
+                    <Typography align="center">
+                      <img
+                        id={i + "" + j}
+                        src="https://icons.iconarchive.com/icons/aha-soft/chess/256/black-queen-2d-icon.png"
+                        width="25%"
+                        style={{ visibility: "hidden" }}
+                      ></img>
+                    </Typography>
                   </Grid>
                 );
               })}
@@ -69,7 +79,25 @@ const QueenVizualizer = () => {
   /**
    * Displays animation on the Vizualizer
    */
-  const setAnimations = () => {};
+  const setAnimations = () => {
+    let board = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ];
+    let animations = SolveNQ(board);
+    for (let i = 0; i < animations.length; i++) {
+      setTimeout(() => {
+        let tile = document.getElementById(
+          animations[i][0] + "" + animations[i][1]
+        );
+        console.log(tile.style.visibility);
+        if (tile.style.visibility === "hidden") tile.style.visibility = "";
+        else tile.style.visibility = "hidden";
+      }, i * 500);
+    }
+  };
 
   /**
    * This functions returns the number of iterations of given algorithm
@@ -84,7 +112,7 @@ const QueenVizualizer = () => {
   const algorithms = [
     {
       title: "BackTracking",
-      method: () => {},
+      method: () => setAnimations(),
     },
   ];
 
