@@ -1,11 +1,11 @@
 # Docker Image which is used as foundation to create
-FROM node:12
+FROM node:12.16.3
 
 # A directory within the virtualized Docker environment
 WORKDIR /usr/src/algovizualizer
 
 # Copies everything over to Docker environment
-COPY . .
+COPY ./ ./
 
 # Installs all node packages
 RUN npm install 
