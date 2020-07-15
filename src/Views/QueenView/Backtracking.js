@@ -1,4 +1,4 @@
-const N = 4;
+const N = 8;
 
 function isSafe(board, row, col) {
   for (let i = 0; i < col; i++) if (board[row][i] === 1) return false;
