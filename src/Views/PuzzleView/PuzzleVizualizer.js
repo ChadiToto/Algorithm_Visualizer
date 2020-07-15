@@ -83,11 +83,6 @@ const PuzzleVizualizer = () => {
   };
 
   /**
-   * Reverts back puzzle to initial state
-   */
-  //const undo = () => {};
-
-  /**
    * Displays animation on the Vizualizer
    */
   const setAnimations = () => {
@@ -170,6 +165,7 @@ const PuzzleVizualizer = () => {
         options={algorithm}
         reset={resetPuzzle}
         time={iterations}
+        undo={resetPuzzle}
       ></Player>
     </Grid>
   );
