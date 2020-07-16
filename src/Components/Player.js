@@ -15,7 +15,6 @@ import ReplayIcon from "@material-ui/icons/Replay";
 import TimerIcon from "@material-ui/icons/Timer";
 
 import { toast } from "react-toastify";
-const { promisify } = require("util");
 
 const useStyles = makeStyles({
   player: {

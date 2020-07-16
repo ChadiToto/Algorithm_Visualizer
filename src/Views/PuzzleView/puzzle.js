@@ -1,10 +1,3 @@
-/*This is the solved puzzle end goal */
-const target = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 0],
-];
-
 /**
  * @class - Representing the Puzzle
  */
@@ -18,6 +11,11 @@ export default class Puzzle {
     this.val = val;
     this.parent = parent;
     this.children = [];
+    this.target = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 0],
+    ];
     this.F = this.getG() + this.getH();
   }
 
@@ -43,7 +41,7 @@ export default class Puzzle {
     let h = 0;
     for (let i = 0; i < this.val.length; i++) {
       for (let j = 0; j < this.val.length; j++) {
-        if (this.val[i][j] !== target[i][j]) h++;
+        if (this.val[i][j] !== this.target[i][j]) h++;
       }
     }
     return h;

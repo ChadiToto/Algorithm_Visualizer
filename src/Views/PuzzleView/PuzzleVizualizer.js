@@ -15,6 +15,8 @@ import Puzzle from "./puzzle";
 /* Premade Puzzles */
 import puzzledata from "./puzzledata";
 
+const { promisify } = require("util");
+
 const useStyles = makeStyles({
   row: {
     backgroundColor: "#eb0839",
@@ -32,6 +34,7 @@ const useStyles = makeStyles({
 const PuzzleVizualizer = () => {
   const classes = useStyles();
   const [puzzle, setPuzzle] = useState([]);
+  const [oldPuzzle, setOldPuzzle] = useState([]);
 
   useEffect(() => {
     resetPuzzle();
@@ -48,7 +51,19 @@ const PuzzleVizualizer = () => {
     // Refresh Effect
     setTimeout(() => {
       setPuzzle(puzzledata[n]);
-    }, 0.5);
+      setOldPuzzle(puzzledata[n]);
+    }, 0.1);
+  };
+
+  /**
+   * Undo any Sorting to the array and reverts it back
+   */
+  const undo = () => {
+    setPuzzle([]);
+    // Refresh Effect
+    setTimeout(() => {
+      setPuzzle(oldPuzzle);
+    }, 1);
   };
 
   /**
@@ -83,9 +98,16 @@ const PuzzleVizualizer = () => {
   };
 
   /**
+   * The conversion of the setTimeOut method to async
+   * is to set the new state of the puzzle after the animations are over.
+   * Shuffled Puzzle => Solved Puzzle
+   */
+  const asyncsetTimeout = promisify(setTimeout);
+
+  /**
    * Displays animation on the Vizualizer
    */
-  const setAnimations = () => {
+  const setAnimations = async () => {
     let puzzleInstance = new Puzzle(puzzle, null);
     let solution = puzzleInstance.Astar()[0];
     let animations = [];
@@ -94,7 +116,6 @@ const PuzzleVizualizer = () => {
       solution = solution.parent;
     }
 
-    let k = 0;
     while (animations.length !== 1) {
       let tileOneKey = animations[0].join("");
       let tileTwoKey = animations[1].join("");
@@ -104,7 +125,7 @@ const PuzzleVizualizer = () => {
 
       for (let i = 0; i < 2; i++) {
         const color = i === 0 ? "red" : "#eb0839";
-        setTimeout(() => {
+        await asyncsetTimeout((resolve) => {
           tileOne.style.backgroundColor = color;
           tileTwo.style.backgroundColor = color;
           if (i !== 0) {
@@ -113,11 +134,12 @@ const PuzzleVizualizer = () => {
               tileOne.innerHTML,
             ];
           }
-        }, k * 300);
-        k++;
+          resolve();
+        }, 300);
       }
       animations.shift();
     }
+    setPuzzle(puzzleInstance.target);
   };
 
   /**
@@ -165,7 +187,7 @@ const PuzzleVizualizer = () => {
         options={algorithm}
         reset={resetPuzzle}
         time={iterations}
-        undo={resetPuzzle}
+        undo={undo}
       ></Player>
     </Grid>
   );
