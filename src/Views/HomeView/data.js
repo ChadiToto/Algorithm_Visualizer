@@ -24,9 +24,9 @@ let data = [
     heading: "Classic Problems",
     children: [
       {
-        title: "4-Queens Problem",
+        title: "8-Queens Problem",
         desc:
-          "Vizualize how you can place 4 Queens into a 4x4 chessboard so that they don't attack each other.",
+          "Vizualize how you can place 8 Queens into a 8x8 chessboard so that they don't attack each other.",
         image:
           "https://static.vecteezy.com/system/resources/thumbnails/000/668/775/small/elegant-valentine-gradient-background.jpg",
         link: "/Queen",
@@ -50,7 +50,8 @@ let data = [
           "Find solutions to questions asked in giant tech compagnies answered in optimal complexity by utilzing more data structures and algorithms. (Updated Regularly) ",
         image:
           "https://t3.ftcdn.net/jpg/01/04/05/40/240_F_104054084_Ch12dStJmYPdNGUwv73yARVbJ7e4i0Ck.jpg",
-        link: "https://github.com/ChadiToto?tab=repositories",
+        link: "https://github.com/ChadiToto/LeetCode",
+        external: true,
       },
     ],
   },

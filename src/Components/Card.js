@@ -51,7 +51,7 @@ export default function MediaCard(props) {
           <CardMedia
             className={classes.media}
             image={props.child.image}
-            title="Sorting Algorithms"
+            title={props.child.title}
           >
             <Box className={classes.content} color="white">
               <Typography className={classes.title}>

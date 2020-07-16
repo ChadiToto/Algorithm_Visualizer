@@ -27,6 +27,26 @@ const useStyles = makeStyles({
   },
 });
 
+const isExternal = (item) => {
+  if (item.external)
+    return (
+      <a
+        href={item.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ textDecoration: "none" }}
+      >
+        <Card child={item}></Card>
+      </a>
+    );
+  else
+    return (
+      <Link to={item.link} style={{ textDecoration: "none" }}>
+        <Card child={item}></Card>
+      </Link>
+    );
+};
+
 const Home = () => {
   const classes = useStyles();
   const content = data.map((row) => {
@@ -45,9 +65,7 @@ const Home = () => {
                   xs={11}
                   md={Math.floor((12 - 1) / row.children.length)}
                 >
-                  <Link to={child.link} style={{ textDecoration: "none" }}>
-                    <Card child={child}></Card>
-                  </Link>
+                  {isExternal(child)}
                 </Grid>
                 <Grid item xs={1}></Grid>
               </>
