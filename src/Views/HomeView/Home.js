@@ -49,6 +49,14 @@ const isExternal = (item) => {
 
 const Home = () => {
   const classes = useStyles();
+
+  React.useEffect(() => {
+    //Clears all animations
+    for (var i = 1; i < 99999; i++) {
+      window.clearTimeout(i);
+    }
+  });
+
   const content = data.map((row) => {
     return (
       <Grid item xs={12} className={classes.root}>

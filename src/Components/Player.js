@@ -136,7 +136,7 @@ const Player = (props) => {
             >
               <PlayCircleFilledIcon className={classes.play} />
             </IconButton>
-            <IconButton className={classes.reset}>x2</IconButton>
+            <IconButton className={classes.reset}>?</IconButton>
             <IconButton onClick={() => displayTime()}>
               <TimerIcon className={classes.reset}></TimerIcon>
             </IconButton>
