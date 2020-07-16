@@ -15,8 +15,7 @@ import ReplayIcon from "@material-ui/icons/Replay";
 import TimerIcon from "@material-ui/icons/Timer";
 
 import { toast } from "react-toastify";
-
-var method = null;
+const { promisify } = require("util");
 
 const useStyles = makeStyles({
   player: {
@@ -53,7 +52,21 @@ const useStyles = makeStyles({
 
 const Player = (props) => {
   const [active, setActive] = useState();
+  const [method, setMethod] = useState();
   const classes = useStyles();
+
+  /**
+   * This function is responsible for displaying animations on the vizualizer
+   */
+  const playAnimations = () => {
+    if (method == null) {
+      return toast.error("No method selected !");
+    } else {
+      method();
+      setActive(null);
+      setMethod(null);
+    }
+  };
 
   /**
    * Displays a toast containing The algorithms and their
@@ -102,7 +115,7 @@ const Player = (props) => {
    */
   const setActiveMethod = (fct, id) => {
     let option = document.getElementById("option_" + id);
-    method = fct;
+    setMethod(() => fct);
     setActive(option);
   };
 
@@ -117,7 +130,10 @@ const Player = (props) => {
             <IconButton onClick={props.reset}>
               <CachedIcon className={classes.reset}></CachedIcon>
             </IconButton>
-            <IconButton style={{ padding: "6px" }} onClick={() => method()}>
+            <IconButton
+              style={{ padding: "6px" }}
+              onClick={() => playAnimations()}
+            >
               <PlayCircleFilledIcon className={classes.play} />
             </IconButton>
             <IconButton className={classes.reset}>x2</IconButton>
