@@ -12,6 +12,9 @@ import Card from "../../Components/Card";
 /* Data */
 import data from "./data";
 
+// HelperFunction
+import clearAnimations from "../../Utils/clearAnim";
+
 const useStyles = makeStyles({
   root: {
     marginTop: "5vh",
@@ -52,9 +55,7 @@ const Home = () => {
 
   React.useEffect(() => {
     //Clears all animations
-    for (var i = 1; i < 99999; i++) {
-      window.clearTimeout(i);
-    }
+    clearAnimations();
   });
 
   const content = data.map((row) => {

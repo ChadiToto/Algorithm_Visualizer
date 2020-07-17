@@ -21,6 +21,9 @@ import paths from "./data/path";
 /* Graph DS */
 import graph from "./WeightedGraph";
 
+/* HelperFunction */
+import clearAnimations from "../../Utils/clearAnim";
+
 /* MapBox Token */
 const TOKEN = process.env.REACT_APP_TOKEN;
 
@@ -107,6 +110,10 @@ const FinderVizualizer = () => {
    * Displays the traversal Animation within the visualizer
    */
   const setAnimations = (path) => {
+    //Before starting anything we need to reset the vizualizer and stop any ongoing animations
+    resetPath();
+    clearAnimations();
+
     /**
      * For each Vertex we visit we change the point data attribute visited to true
      * in order to mark the "point" in the displayed screen

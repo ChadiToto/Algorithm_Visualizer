@@ -12,6 +12,9 @@ import Player from "../../Components/Player";
 /* BackTracking */
 import SolveNQ from "./Backtracking";
 
+/* HelperFunction */
+import clearAnimations from "../../Utils/clearAnim";
+
 const PRIMARY_TILE = "black";
 const SECONDARY_TILE = "white";
 
@@ -101,6 +104,8 @@ const QueenVizualizer = () => {
    * Displays animation on the Vizualizer
    */
   const setAnimations = () => {
+    resetBoard();
+    clearAnimations();
     let animations = SolveNQ(board);
     for (let i = 0; i < animations.length; i++) {
       setTimeout(() => {
