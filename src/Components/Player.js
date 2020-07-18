@@ -14,6 +14,9 @@ import CachedIcon from "@material-ui/icons/Cached";
 import ReplayIcon from "@material-ui/icons/Replay";
 import TimerIcon from "@material-ui/icons/Timer";
 
+/* Data */
+import helpData from "./data/playerData";
+
 import { toast } from "react-toastify";
 
 const useStyles = makeStyles({
@@ -65,6 +68,62 @@ const Player = (props) => {
       setActive(null);
       setMethod(null);
     }
+  };
+
+  /**
+   * This function displays information about the project
+   */
+  const help1 = () => {
+    toast(
+      <div style={{ padding: 10 }}>
+        <Typography>
+          - To start vizualizing pick an algorithm below the{" "}
+          <PlayCircleFilledIcon className={classes.reset} /> button and play it
+          by clicking the button.
+        </Typography>
+        <Typography style={{ marginTop: 10 }}>
+          - Click here for the source code of this project.
+        </Typography>
+      </div>,
+      {
+        position: "top-left",
+        autoClose: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
+    help2();
+  };
+
+  /**
+   * This function explains the multiple features of the vizualizer
+   */
+  const help2 = () => {
+    toast(
+      <div style={{ padding: 10 }}>
+        {helpData.map((child) => {
+          return (
+            <Typography>
+              {React.createElement(child.component, {
+                style: { fontSize: 15 },
+              })}
+              : {child.desc}
+            </Typography>
+          );
+        })}
+        <Typography>? : Displays this screen</Typography>
+      </div>,
+      {
+        position: "top-left",
+        autoClose: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      }
+    );
   };
 
   /**
@@ -135,7 +194,9 @@ const Player = (props) => {
             >
               <PlayCircleFilledIcon className={classes.play} />
             </IconButton>
-            <IconButton className={classes.reset}>?</IconButton>
+            <IconButton className={classes.reset} onClick={() => help1()}>
+              ?
+            </IconButton>
             <IconButton onClick={() => displayTime()}>
               <TimerIcon className={classes.reset}></TimerIcon>
             </IconButton>

@@ -147,7 +147,7 @@ const PuzzleVizualizer = () => {
    * Required in order to find a solution
    */
   const getIterations = () => {
-    let puzzleInstance = new Puzzle(puzzle, null);
+    let puzzleInstance = new Puzzle(oldPuzzle, null);
     return puzzleInstance.Astar()[1] + " Iterations";
   };
 
