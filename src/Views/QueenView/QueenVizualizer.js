@@ -37,6 +37,9 @@ const QueenVizualizer = () => {
 
   useEffect(() => {
     resetBoard();
+    return () => {
+      clearAnimations();
+    };
   }, []);
 
   /**

@@ -103,9 +103,9 @@ const Player = (props) => {
   const help2 = () => {
     toast(
       <div style={{ padding: 10 }}>
-        {helpData.map((child) => {
+        {helpData.map((child, index) => {
           return (
-            <Typography>
+            <Typography key={index}>
               {React.createElement(child.component, {
                 style: { fontSize: 15 },
               })}
@@ -134,9 +134,9 @@ const Player = (props) => {
     toast.info(
       <div>
         <div className={classes.timerTitle}>{props.time.title}</div>
-        {props.time.algorithms.map((algo) => {
+        {props.time.algorithms.map((algo, index) => {
           return (
-            <div className={classes.timerElements}>
+            <div className={classes.timerElements} key={index}>
               {algo.title} : {algo.time}
             </div>
           );

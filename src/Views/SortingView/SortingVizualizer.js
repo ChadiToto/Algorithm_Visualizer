@@ -19,6 +19,9 @@ import mergeSort from "./Algorithms/MergeSort";
 /* Custom Components */
 import Player from "../../Components/Player";
 
+// Helper Function
+import clearAnimations from "../../Utils/clearAnim";
+
 const useStyles = makeStyles({
   container: {
     backgroundColor: "#EDEFED",
@@ -35,6 +38,9 @@ const SortingVizualizer = () => {
 
   useEffect(() => {
     resetArray();
+    return () => {
+      clearAnimations();
+    };
   }, []);
 
   /**

@@ -15,7 +15,14 @@ import Puzzle from "./puzzle";
 /* Premade Puzzles */
 import puzzledata from "./puzzledata";
 
+// Helper Function
+import clearAnimations from "../../Utils/clearAnim";
+
 const { promisify } = require("util");
+
+/* Constants*/
+const PRIMARY = "red";
+const SECONDARY = "#eb0839";
 
 const useStyles = makeStyles({
   row: {
@@ -38,6 +45,9 @@ const PuzzleVizualizer = () => {
 
   useEffect(() => {
     resetPuzzle();
+    return () => {
+      clearAnimations();
+    };
   }, []);
 
   /**
@@ -124,7 +134,7 @@ const PuzzleVizualizer = () => {
       let tileTwo = document.getElementById(tileTwoKey);
 
       for (let i = 0; i < 2; i++) {
-        const color = i === 0 ? "red" : "#eb0839";
+        const color = i === 0 ? PRIMARY : SECONDARY;
         await asyncsetTimeout((resolve) => {
           tileOne.style.backgroundColor = color;
           tileTwo.style.backgroundColor = color;

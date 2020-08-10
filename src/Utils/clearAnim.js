@@ -1,5 +1,6 @@
 export default function clearAnimations() {
-  for (var i = 1; i < 1000; i++) {
-    window.clearTimeout(i);
+  var highestTimeoutId = setTimeout(1000, "");
+  for (var i = 0; i < highestTimeoutId; i++) {
+    clearTimeout(i);
   }
 }

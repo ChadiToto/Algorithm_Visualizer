@@ -24,8 +24,12 @@ import graph from "./WeightedGraph";
 /* HelperFunction */
 import clearAnimations from "../../Utils/clearAnim";
 
-/* MapBox Token */
+/* Constants */
 const TOKEN = process.env.REACT_APP_TOKEN;
+const START = [35, 206, 250];
+const GOAL = [50, 205, 50];
+const VISITED = [147, 112, 219];
+const DEFAULT = [220, 20, 60];
 
 const useStyles = makeStyles({
   player: {
@@ -56,6 +60,9 @@ const FinderVizualizer = () => {
   useEffect(() => {
     /* Points Initialization */
     modifyPointLayer([...points]);
+    return () => {
+      clearAnimations();
+    };
   }, []);
 
   /**
@@ -80,10 +87,10 @@ const FinderVizualizer = () => {
         getPosition: (d) => d.coordinates,
         getRadius: (d) => Math.sqrt(d.exits),
         getFillColor: (d) => {
-          if (d.start) return [35, 206, 250];
-          else if (d.end) return [50, 205, 50];
-          else if (d.visited) return [147, 112, 219];
-          else return [220, 20, 60];
+          if (d.start) return START;
+          else if (d.end) return GOAL;
+          else if (d.visited) return VISITED;
+          else return DEFAULT;
         },
         getLineColor: (d) => [255, 255, 255],
       })
