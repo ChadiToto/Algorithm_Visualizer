@@ -64,6 +64,7 @@ class WeightedGraph {
    */
   DFS(start, target) {
     const result = [];
+    let distance = 0;
     const visited = {};
     const helper = (vert) => {
       if (!vert) return null;
@@ -72,12 +73,13 @@ class WeightedGraph {
       if (vert === target) return null;
       for (let neighbor in this.adjacencyList[vert]) {
         if (!visited[neighbor]) {
+          distance += this.adjacencyList[vert][neighbor];
           return helper(neighbor);
         }
       }
     };
     helper(start);
-    return result;
+    return [result, distance];
   }
 
   /**
@@ -89,18 +91,20 @@ class WeightedGraph {
     const queue = [start];
     const result = [];
     const visited = {};
+    let distance = 0;
     while (queue.length) {
       let current = queue.shift();
       visited[current] = true;
       result.push(current);
       for (let neighbor in this.adjacencyList[current]) {
         if (!visited[neighbor]) {
+          distance += this.adjacencyList[current][neighbor];
           visited[neighbor] = true;
           queue.push(neighbor);
         }
       }
     }
-    return result;
+    return [result, distance];
   }
 
   /**
@@ -113,6 +117,7 @@ class WeightedGraph {
     const costFromStartTo = {};
     const checkList = new PriorityQueue();
     const prev = {};
+    let distance = 0;
 
     let current;
     let result = [];
@@ -125,10 +130,12 @@ class WeightedGraph {
       }
       prev[vert] = null;
     }
+
     while (checkList.values.length) {
       current = checkList.dequeue().val;
       if (current === finish) {
         while (prev[current]) {
+          distance += this.adjacencyList[current][prev[current]];
           result.push(current);
           current = prev[current];
         }
@@ -145,7 +152,7 @@ class WeightedGraph {
         }
       }
     }
-    return result.concat(current).reverse();
+    return [result.concat(current).reverse(), distance];
   }
 }
 

@@ -150,13 +150,13 @@ const FinderVizualizer = () => {
   const setTraversal = (algorithm) => {
     switch (algorithm) {
       case 0:
-        setAnimations(graph.Dijkstra("Paris", "Toulon"));
+        setAnimations(graph.Dijkstra("Paris", "Toulon")[0]);
         break;
       case 1:
-        setAnimations(graph.DFS("Paris", "Toulon"));
+        setAnimations(graph.DFS("Paris", "Toulon")[0]);
         break;
       case 2:
-        setAnimations(graph.BFS("Paris"));
+        setAnimations(graph.BFS("Paris")[0]);
         break;
       default:
         console.error("Invalid Algorithm");
@@ -187,6 +187,30 @@ const FinderVizualizer = () => {
       method: () => setTraversal(2),
     },
   ];
+
+  /**
+   * Associate Every Algorithm with the time it takes to travel from Paris to Toulon
+   *
+   * This variable is passed to child components as props.
+   * @type {object}
+   */
+  const timeMethods = {
+    title: "Traveling From Paris to Toulon Took :",
+    algorithms: [
+      {
+        title: "BFS",
+        time: graph.BFS("Paris")[1].toFixed(2) + " Km",
+      },
+      {
+        title: "DFS",
+        time: graph.DFS("Paris", "Toulon")[1].toFixed(2) + " Km",
+      },
+      {
+        title: "Dijkstra",
+        time: graph.Dijkstra("Paris", "Toulon")[1].toFixed(2) + " Km",
+      },
+    ],
+  };
 
   /**
    * This layer displays a line that connects cities within the map
@@ -226,6 +250,7 @@ const FinderVizualizer = () => {
         reset={resetPath}
         className={classes.player}
         undo={resetPath}
+        time={timeMethods}
       ></Player>
     </Grid>
   );

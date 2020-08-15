@@ -186,7 +186,6 @@ const SortingVizualizer = () => {
 
   /**
    * Associate Every Algorithm with the time it takes to sort
-   * a 10K length array.
    *
    * This variable is passed to child components as props.
    * @type {object}
