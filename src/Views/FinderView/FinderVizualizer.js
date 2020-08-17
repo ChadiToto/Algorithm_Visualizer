@@ -19,7 +19,7 @@ import points from "./data/point_data";
 import paths from "./data/path";
 
 /* Graph DS */
-import graph from "./WeightedGraph";
+import graph from "./datastructures/WeightedGraph";
 
 /* HelperFunction */
 import clearAnimations from "../../Utils/clearAnim";

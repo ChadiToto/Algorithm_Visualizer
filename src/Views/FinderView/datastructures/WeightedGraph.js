@@ -1,5 +1,5 @@
-import data from "./data/point_data";
-import coordinates from "./data/coordinates";
+import data from "../data/point_data";
+import coordinates from "../data/coordinates";
 import PriorityQueue from "./PriorityQueue";
 
 /**
@@ -60,7 +60,8 @@ class WeightedGraph {
   /**
    * Applies Depth-First-Search to the Graph
    * @param {string} target - is the target vertex we're looking for
-   * @return {array} The path to be displayed on the visualizer
+   * @return {object} containing The path to be displayed on the visualizer
+   * and the cost of the algorithm
    */
   DFS(start, target) {
     const result = [];
@@ -85,7 +86,8 @@ class WeightedGraph {
   /**
    * Applies Breadth-First Search to the Graph
    * @param {string} start - is the starting vertex we're going from
-   * @return {array} - The path to be displayed on the visualizer
+   * @return {object} containing The path to be displayed on the visualizer
+   * and the cost of the algorithm
    */
   BFS(start) {
     const queue = [start];
@@ -111,7 +113,8 @@ class WeightedGraph {
    * Applies Dijkstra Algorithm to the Graph
    * @param {string} start - Vertex we're going from
    * @param {string} finish - Vertex we're going to
-   * @return - The path to be displayed on the visualizer
+   * @return {object} containing The path to be displayed on the visualizer
+   * and the cost of the algorithm
    */
   Dijkstra(start, finish) {
     const costFromStartTo = {};

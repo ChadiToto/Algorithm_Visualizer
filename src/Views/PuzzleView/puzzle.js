@@ -130,7 +130,8 @@ export default class Puzzle {
 
   /**
    * This method is used for solving the puzzle using the A* Algorithm
-   * @todo GENERATE PATH
+   * @returns {object} of the current state of the puzzle to be reconstructed
+   * as the path and the number of iterations it took
    */
   Astar() {
     let count = 0;

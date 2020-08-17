@@ -13,7 +13,7 @@ import Player from "../../Components/Player";
 import Puzzle from "./puzzle";
 
 /* Premade Puzzles */
-import puzzledata from "./puzzledata";
+import puzzledata from "./data";
 
 // Helper Function
 import clearAnimations from "../../Utils/clearAnim";

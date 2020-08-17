@@ -1,5 +1,5 @@
 /* React Main Features */
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 /* Material UI Features */
@@ -56,6 +56,11 @@ const Player = (props) => {
   const [active, setActive] = useState();
   const [method, setMethod] = useState();
   const classes = useStyles();
+
+  /**Show the help box when the component is mounted */
+  useEffect(() => {
+    help1();
+  });
 
   /**
    * This function is responsible for displaying animations on the vizualizer
