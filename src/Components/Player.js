@@ -57,11 +57,6 @@ const Player = (props) => {
   const [method, setMethod] = useState();
   const classes = useStyles();
 
-  /**Show the help box when the component is mounted */
-  useEffect(() => {
-    help1();
-  });
-
   /**
    * This function is responsible for displaying animations on the vizualizer
    */
