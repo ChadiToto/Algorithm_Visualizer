@@ -23,12 +23,12 @@ You can also run this app using docker by using the command below :
 
 <table>
 <tr>
-    <td><img src="https://im7.ezgif.com/tmp/ezgif-7-a78269d5cede.gif" width=400 height=400/> </td>
-        <td><img src="https://im7.ezgif.com/tmp/ezgif-7-d5827d36836f.gif" width=400 height=405/> </td>
+    <td><img src="https://imgur.com/sFcvluX.gif" width=400 height=400/> </td>
+        <td><img src="https://imgur.com/EUFRVL0.gif" width=400 height=405/> </td>
   </tr>
   <tr>
-    <td><img src="https://im7.ezgif.com/tmp/ezgif-7-06bd87d938a6.gif" width=400 height=400/> </td>
-        <td><img src="https://im7.ezgif.com/tmp/ezgif-7-22f089dac808.gif" width=400 height=400/> </td>
+    <td><img src="https://imgur.com/PRpKvb0.gif" width=400 height=400/> </td>
+        <td><img src="https://imgur.com/af3YfTN.gif" width=400 height=400/> </td>
   </tr>
  </table>
 
